@@ -11,5 +11,5 @@ public interface LoadService {
 	
 	List<LoadDAO> getAllLoad();
 
-	LoadDAO save();
+	void save(LoadDAO load);
 }

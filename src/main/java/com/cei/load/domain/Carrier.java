@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.cei.load.domain.vo.IdentifiableBase;
+import com.cei.load.domain.vo.Auditable;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +17,7 @@ import lombok.Setter;
 @SequenceGenerator(name = "seq", sequenceName = "tpl.carrier_seq", allocationSize = 1)
 @Getter
 @Setter
-public class Carrier extends IdentifiableBase {
+public class Carrier extends Auditable<Long> {
 	
 	@Column(name = "carrier_name")
 	String carrierName;

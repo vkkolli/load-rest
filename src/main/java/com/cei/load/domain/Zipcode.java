@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.cei.load.domain.vo.IdentifiableBase;
+import com.cei.load.domain.vo.Identifiable;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +17,7 @@ import lombok.Setter;
 @SequenceGenerator(name = "seq", sequenceName = "tpl.us_zip_seq", allocationSize = 1)
 @Getter
 @Setter
-public class Zipcode extends IdentifiableBase {
+public class Zipcode extends Identifiable<Long> {
 	
 	@Column(name = "zipcode")
 	String zipcode;

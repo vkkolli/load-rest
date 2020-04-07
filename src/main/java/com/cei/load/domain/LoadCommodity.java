@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.cei.load.domain.vo.IdentifiableBase;
+import com.cei.load.domain.vo.Auditable;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +19,7 @@ import lombok.Setter;
 @SequenceGenerator(name = "seq", sequenceName = "tpl.load_commodity_seq", allocationSize = 1)
 @Getter
 @Setter
-public class LoadCommodity extends IdentifiableBase {
+public class LoadCommodity extends Auditable<Long> {
 	
 	@Column(name = "load_id")
 	Long load; //fk

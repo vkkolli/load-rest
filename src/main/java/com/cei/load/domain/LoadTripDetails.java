@@ -13,7 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.cei.load.domain.vo.IdentifiableBase;
+import com.cei.load.domain.vo.Auditable;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +24,7 @@ import lombok.Setter;
 @SequenceGenerator(name = "seq", sequenceName = "tpl.load_trip_details_seq", allocationSize = 1)
 @Getter
 @Setter
-public class LoadTripDetails extends IdentifiableBase {
+public class LoadTripDetails extends Auditable<Long> {
 	
 //	@Column(name = "load_id")
 	@OneToOne
