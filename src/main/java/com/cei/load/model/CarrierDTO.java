@@ -1,6 +1,6 @@
 package com.cei.load.model;
 
-public class CarrierDAO {
+public class CarrierDTO {
 
 	Long id;
 	

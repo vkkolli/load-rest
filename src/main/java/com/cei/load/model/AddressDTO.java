@@ -1,6 +1,6 @@
 package com.cei.load.model;
 
-public class AddressDAO {
+public class AddressDTO {
 
 	Long id;
 	

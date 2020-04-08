@@ -16,7 +16,7 @@ public class APIResponse {
 	
 
 	
-	private List<LoadDAO> loads;
+	private List<LoadDTO> loads;
 	
 
 	public APIResponse() {

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cei.load.model.APIResponse;
-import com.cei.load.model.LoadDAO;
+import com.cei.load.model.LoadDTO;
 import com.cei.load.model.LoadDTO;
 import com.cei.load.service.LoadService;
 
@@ -36,13 +36,13 @@ public class LoadRestController {
 	}
 
 	@RequestMapping("/")
-	public ResponseEntity<List<LoadDAO>> get() {
-		List<LoadDAO> allLoad = loadService.getAllLoad();
-		return new ResponseEntity<List<LoadDAO>>(allLoad, HttpStatus.OK);
+	public ResponseEntity<List<LoadDTO>> get() {
+		List<LoadDTO> allLoad = loadService.getAllLoad();
+		return new ResponseEntity<List<LoadDTO>>(allLoad, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void save(@RequestBody LoadDAO load){
+	public void save(@RequestBody LoadDTO load){
 		loadService.save(load);
 	}
 

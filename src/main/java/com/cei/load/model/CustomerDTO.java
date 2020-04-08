@@ -1,6 +1,6 @@
 package com.cei.load.model;
 
-public class CustomerDAO {
+public class CustomerDTO {
 	
 	Long id;
 	

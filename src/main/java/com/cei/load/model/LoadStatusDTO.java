@@ -1,6 +1,6 @@
 package com.cei.load.model;
 
-public class LoadStatusDAO {
+public class LoadStatusDTO {
 	
 	Long loadStatusId;
 	

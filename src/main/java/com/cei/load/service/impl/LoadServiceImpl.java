@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.cei.load.domain.Load;
 import com.cei.load.model.APIResponse;
-import com.cei.load.model.LoadDAO;
+import com.cei.load.model.LoadDTO;
 import com.cei.load.repository.LoadRepository;
 import com.cei.load.service.LoadService;
 
@@ -36,21 +36,21 @@ public class LoadServiceImpl implements LoadService {
 		List<Load> activeLoads = loadRepository.findAllActiveLoads();
 		apiResponse = new APIResponse();
 		apiResponse.setLoads(
-				activeLoads.stream().map(type -> modelMapper.map(type, LoadDAO.class)).collect(Collectors.toList()));
+				activeLoads.stream().map(type -> modelMapper.map(type, LoadDTO.class)).collect(Collectors.toList()));
 		return apiResponse;
 	}
 
 	@Override
-	public List<LoadDAO> getAllLoad() {
+	public List<LoadDTO> getAllLoad() {
 		List<Load> loadList = loadRepository.findAll();
-		Type listType = new TypeToken<List<LoadDAO>>() {
+		Type listType = new TypeToken<List<LoadDTO>>() {
 		}.getType();
-		List<LoadDAO> loads = modelMapper.map(loadList, listType);
+		List<LoadDTO> loads = modelMapper.map(loadList, listType);
 		return loads;
 	}
 
 	@Override
-	public void save(LoadDAO load) {
+	public void save(LoadDTO load) {
 		LOGGER.info("In save load");
 		try {
 			Load loadEntity = modelMapper.map(load, Load.class);
