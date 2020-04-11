@@ -18,7 +18,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "load", schema = "tpl")
+@Table(name = "load", schema = "logisol")
 @AttributeOverride(name = "id", column = @Column(name = "load_id"))
 @SequenceGenerator(name = "seq", sequenceName = "tpl.load_seq", allocationSize = 1)
 @Getter
@@ -28,27 +28,22 @@ public class Load extends Auditable<Long> {
 	@Column(name = "load_description")
 	String loadDescription;
 	
-//	@Column(name = "customer_id")
 	@OneToOne
 	@JoinColumn(name = "customer_id")
 	Customer customer;
 	
-//	@Column(name = "customer_address_id")
 	@OneToOne
 	@JoinColumn(name = "customer_address_id")
 	Address customerAddress;
 	
-//	@Column(name = "load_status_id")
 	@OneToOne
 	@JoinColumn(name = "load_status_id")
 	LoadStatus loadStatus;
 	
-//	@Column(name = "carrier_id")
 	@OneToOne
 	@JoinColumn(name = "carrier_id")
 	Carrier carrier;
 	
-//	@Column(name = "equipment_id")
 	@OneToOne
 	@JoinColumn(name = "equipment_id")
 	Equipment equipment;
@@ -59,31 +54,17 @@ public class Load extends Auditable<Long> {
 	@Column(name = "total_cost")
 	BigDecimal totalCost;
 	
-	@Column(name = "max_revenue")
-	BigDecimal maxRevenue;
+	@Column(name = "max_rate")
+	BigDecimal maxRate;
 	
-	@Column(name = "target")
-	BigDecimal target;
+	@Column(name = "target_rate")
+	BigDecimal targetRate;
 	
-	@Column(name = "load_type")
-	String loadType;
+	@Column(name = "load_size")
+	String loadSize;
 	
-	@Column(name = "expected_pickup_date")
-	Date expectedPickupDate;
-	
-	@Column(name = "expected_pickup_time")
-	Time expectedPickupTime;
-	
-	@Column(name = "expected_delivery_date")
-	Date expectedDeliveryDate;
-	
-	@Column(name = "expected_delivery_time")
-	Time expectedDeliveryTime;
-	
-	@Column(name = "confirm_pickup")
-	boolean confirmPickup;
-	
-	@Column(name = "confirm_delivery")
-	boolean confirmDelivery;
+	@Column(name="trip_mileage")
+	BigDecimal tripMileage;
+
 	
 }

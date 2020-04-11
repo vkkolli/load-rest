@@ -12,15 +12,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "customer", schema = "tpl")
+@Table(name = "customer", schema = "logisol")
 @AttributeOverride(name = "id", column = @Column(name = "customer_id"))
-@SequenceGenerator(name = "seq", sequenceName = "tpl.customer_seq", allocationSize = 1)
+@SequenceGenerator(name = "seq", sequenceName = "logisol.customer_seq", allocationSize = 1)
 @Getter
 @Setter
 public class Customer extends Auditable<Long> {
 	
 	@Column(name = "company")
 	String company;
+
+	@Column(name="customer_email")
+	String customerEmail;
 	
 	@Column(name = "is_active")
 	boolean isActive;

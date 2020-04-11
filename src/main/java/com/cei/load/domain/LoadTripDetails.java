@@ -4,14 +4,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.cei.load.domain.vo.Auditable;
 
@@ -19,28 +12,34 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "load_trip_details", schema = "tpl")
+@Table(name = "load_trip_details", schema = "logisol")
 @AttributeOverride(name = "id", column = @Column(name = "load_trip_details_id"))
-@SequenceGenerator(name = "seq", sequenceName = "tpl.load_trip_details_seq", allocationSize = 1)
+@SequenceGenerator(name = "seq", sequenceName = "logisol.load_trip_details_seq", allocationSize = 1)
 @Getter
 @Setter
 public class LoadTripDetails extends Auditable<Long> {
-	
-//	@Column(name = "load_id")
+
+	public enum TripTypes {ORGIN, DESTINATION, STOPOFF_PICKUP, STOPOFF_DELIVERY} ;
+
 	@OneToOne
 	@JoinColumn(name = "load_id")
-	Load load; //fk
+	Load load;
+
+	@Enumerated(EnumType.STRING)
+	@Column(length = 8)
+	private TripTypes tripType;
+
+	@Column(name = "expected_trip_date")
+	Date expectedTripDate;
 	
-//	@Column(name = "trip_type_id")
-	@OneToMany
-	@JoinColumn(name = "trip_type_id")
-	List<TripType> tripType; //fk
-	
-	@Column(name = "trip_date")
-	Date tripDate;
-	
-	@Column(name = "trip_time")
-	Time tripTime;
+	@Column(name = "expected_trip_time")
+	Time expectedTripTime;
+
+	@Column(name = "actual_trip_date")
+	Date actualTripDate;
+
+	@Column(name = "actual_trip_time")
+	Time actualripTime;
 	
 	@Column(name = "city")
 	String city;
@@ -53,4 +52,7 @@ public class LoadTripDetails extends Auditable<Long> {
 	
 	@Column(name = "zip_code")
 	String zipCode;
+
+	@Column(name ="is_active")
+	boolean isActive;
 }

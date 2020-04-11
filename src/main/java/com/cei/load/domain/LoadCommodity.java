@@ -14,9 +14,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "load_commodity", schema = "tpl")
+@Table(name = "load_commodity", schema = "logisol")
 @AttributeOverride(name = "id", column = @Column(name = "load_commodity_id"))
-@SequenceGenerator(name = "seq", sequenceName = "tpl.load_commodity_seq", allocationSize = 1)
+@SequenceGenerator(name = "seq", sequenceName = "logisol.load_commodity_seq", allocationSize = 1)
 @Getter
 @Setter
 public class LoadCommodity extends Auditable<Long> {

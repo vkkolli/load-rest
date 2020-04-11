@@ -14,9 +14,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "equipment", schema = "tpl")
+@Table(name = "equipment", schema = "logisol")
 @AttributeOverride(name = "id", column = @Column(name = "equipment_id"))
-@SequenceGenerator(name = "seq", sequenceName = "tpl.equipment_seq", allocationSize = 1)
+@SequenceGenerator(name = "seq", sequenceName = "logisol.equipment_seq", allocationSize = 1)
 @Getter
 @Setter
 public class Equipment extends Auditable<Long> {
@@ -26,15 +26,6 @@ public class Equipment extends Auditable<Long> {
 	
 	@Column(name = "equipment_description")
 	String equipmentDescription;
-	
-	@Column(name = "containter_size")
-	Short containerSize;
-	
-	@Column(name = "container_weight")
-	BigInteger containerWeight;
-	
-	@Column(name = "container_height")
-	BigInteger containerHeight;
 	
 	@Column(name = "is_active")
 	boolean isActive;

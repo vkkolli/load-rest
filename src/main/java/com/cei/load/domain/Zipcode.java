@@ -12,9 +12,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "us_zip", schema = "tpl")
+@Table(name = "us_zip", schema = "logisol")
 @AttributeOverride(name = "id", column = @Column(name = "us_zip_id"))
-@SequenceGenerator(name = "seq", sequenceName = "tpl.us_zip_seq", allocationSize = 1)
+@SequenceGenerator(name = "seq", sequenceName = "logisol.us_zip_seq", allocationSize = 1)
 @Getter
 @Setter
 public class Zipcode extends Identifiable<Long> {

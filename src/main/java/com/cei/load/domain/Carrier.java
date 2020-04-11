@@ -12,18 +12,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "carrier", schema = "tpl")
+@Table(name = "carrier", schema = "logisol")
 @AttributeOverride(name = "id", column = @Column(name = "carrier_id"))
-@SequenceGenerator(name = "seq", sequenceName = "tpl.carrier_seq", allocationSize = 1)
+@SequenceGenerator(name = "seq", sequenceName = "logisol.carrier_seq", allocationSize = 1)
 @Getter
 @Setter
 public class Carrier extends Auditable<Long> {
 	
 	@Column(name = "carrier_name")
 	String carrierName;
-	
-	@Column(name = "equipment_id") //fk
-	Long equipment;
 	
 	@Column(name = "carrier_contact")
 	String carrierContact;

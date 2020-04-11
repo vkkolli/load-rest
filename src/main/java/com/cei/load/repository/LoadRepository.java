@@ -10,11 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LoadRepository extends JpaRepository<Load, Long> {
 
-
-	@Query(value = "select\r\n" + "	*\r\n" + "from\r\n" + "	load_mgmt.loads load\r\n" + "where\r\n"
-			+ "	load.is_active = true\r\n"
-			+ "	order by load.posted_date desc ", nativeQuery = true)
-	List<Load> findAllActiveLoads();
+	public List<Load> findAll();
 
 
 }

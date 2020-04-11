@@ -12,9 +12,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "addresses", schema = "tpl")
+@Table(name = "addresses", schema = "logisol")
 @AttributeOverride(name = "id", column = @Column(name = "address_id"))
-@SequenceGenerator(name = "seq", sequenceName = "tpl.addresses_seq", allocationSize = 1)
+@SequenceGenerator(name = "seq", sequenceName = "logisol.addresses_seq", allocationSize = 1)
 @Getter
 @Setter
 public class Address extends Auditable<Long>{
@@ -48,4 +48,7 @@ public class Address extends Auditable<Long>{
 	
 	@Column(name = "phone_no")
 	String phoneNo;
+
+	@Column(name = "is_active")
+	boolean isActive;
 }
