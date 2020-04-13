@@ -40,7 +40,7 @@ public class CustomerRestController {
 	 * @param customerId the customer id
 	 * @return the response entity
 	 */
-	@RequestMapping("/{id}")
+	@RequestMapping("/{customerId}")
 	public ResponseEntity<CustomerDTO> edit(@PathVariable Long customerId) {
 		CustomerDTO customer = customerService.fetchCustomerById(customerId);
 		return new ResponseEntity<CustomerDTO>(customer, HttpStatus.OK);
