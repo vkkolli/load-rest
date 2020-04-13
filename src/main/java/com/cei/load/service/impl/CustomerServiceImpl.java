@@ -11,7 +11,9 @@ import com.cei.load.domain.Customer;
 import com.cei.load.model.CustomerDTO;
 import com.cei.load.repository.CustomerRepository;
 import com.cei.load.service.CustomerService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CustomerServiceImpl implements CustomerService {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(LoadServiceImpl.class);
