@@ -30,4 +30,12 @@ public interface LoadService {
 	 * @param load the load
 	 */
 	void save(LoadDTO load);
+	
+	/**
+	 * Gets the load by id.
+	 *
+	 * @param loadId the load id
+	 * @return the load by id
+	 */
+	LoadDTO getLoadById(Long loadId);
 }

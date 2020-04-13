@@ -2,6 +2,7 @@ package com.cei.load.service.impl;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -82,5 +83,16 @@ public class LoadServiceImpl implements LoadService {
 		}
 		LOGGER.info("load created id: {}", load.getId());
 	}
-
+	
+	/**
+	 * Gets the load by id.
+	 *
+	 * @param loadId the load id
+	 * @return the load by id
+	 */
+	@Override
+	public LoadDTO getLoadById(Long loadId) {
+		Load load = loadRepository.findById(loadId).get();
+		return modelMapper.map(load, LoadDTO.class);
+	}
 }
