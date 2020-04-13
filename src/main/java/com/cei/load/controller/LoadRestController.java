@@ -2,8 +2,6 @@ package com.cei.load.controller;
 
 import java.util.List;
 
-import com.cei.load.model.LoadBoardDTO;
-import com.cei.load.service.LoadBoardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,25 +13,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cei.load.model.APIResponse;
+import com.cei.load.model.LoadBoardDTO;
 import com.cei.load.model.LoadDTO;
-import com.cei.load.model.LoadDTO;
+import com.cei.load.service.LoadBoardService;
 import com.cei.load.service.LoadService;
 
 
 
+/**
+ * The Class LoadRestController.
+ */
 @RestController
 @RequestMapping("/load")
 public class LoadRestController {
 
+	/** The Constant LOGGER. */
 	private static final Logger LOGGER = LoggerFactory.getLogger(LoadRestController.class);
 
+	/** The load service. */
 	@Autowired
 	LoadService loadService;
 
+	/** The load board service. */
 	@Autowired
 	LoadBoardService loadBoardService;
 
+	/**
+	 * Gets the all active loads.
+	 *
+	 * @return the all active loads
+	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<LoadBoardDTO>> getAllActiveLoads() {
 		LOGGER.info("LoadRestController:: getAllActiveLoads-->");
@@ -41,6 +50,11 @@ public class LoadRestController {
 
 	}
 	
+	/**
+	 * Save.
+	 *
+	 * @param load the load
+	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void save(@RequestBody LoadDTO load){
 		loadService.save(load);

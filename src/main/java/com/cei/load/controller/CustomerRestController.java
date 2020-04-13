@@ -11,19 +11,35 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cei.load.model.CustomerDTO;
 import com.cei.load.service.CustomerService;
 
+/**
+ * The Class CustomerRestController.
+ */
 @RestController
 @RequestMapping("/customer")
 public class CustomerRestController {
 	
+	/** The customer service. */
 	@Autowired
 	CustomerService customerService;
 	
+	/**
+	 * Save.
+	 *
+	 * @param customer the customer
+	 * @return the response entity
+	 */
 	@RequestMapping("/create")
 	public ResponseEntity<CustomerDTO> save(@RequestBody CustomerDTO customer) {
 		customer = customerService.save(customer);
 		return new ResponseEntity<CustomerDTO>(customer, HttpStatus.OK);
 	}
 	
+	/**
+	 * Edits the.
+	 *
+	 * @param customerId the customer id
+	 * @return the response entity
+	 */
 	@RequestMapping("/{id}")
 	public ResponseEntity<CustomerDTO> edit(@PathVariable Long customerId) {
 		CustomerDTO customer = customerService.fetchCustomerById(customerId);

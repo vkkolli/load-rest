@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Formula;
+
 import com.cei.load.domain.vo.Identifiable;
 
 import lombok.Getter;
@@ -18,34 +20,37 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Zipcode extends Identifiable<Long> {
-	
+
 	@Column(name = "zipcode")
 	String zipcode;
-	
+
 	@Column(name = "city")
 	String city;
-	
+
 	@Column(name = "state")
-	String state;
-	
+	String stateName;
+
 	@Column(name = "state_abbr")
 	char stateAbbr;
-	
+
 	@Column(name = "county_area")
 	String countryArea;
-	
+
 	@Column(name = "code")
-	char code;
-	
+	char countryCode;
+
 	@Column(name = "latitude")
 	Double latitude;
-	
+
 	@Column(name = "longitude")
 	Double longitude;
-	
+
 	@Column(name = "country")
 	String country;
-	
+
 	@Column(name = "country_abbr")
 	String countryAbbr;
+
+	@Formula("UPPER(city || ', ' || state || ', ' || zipcode)")
+	private String fullAddress;
 }

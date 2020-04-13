@@ -17,20 +17,32 @@ import com.cei.load.model.LoadDTO;
 import com.cei.load.repository.LoadRepository;
 import com.cei.load.service.LoadService;
 
+/**
+ * The Class LoadServiceImpl.
+ */
 @Service
 public class LoadServiceImpl implements LoadService {
 
+	/** The Constant LOGGER. */
 	private static final Logger LOGGER = LoggerFactory.getLogger(LoadServiceImpl.class);
 
+	/** The load repository. */
 	@Autowired
 	LoadRepository loadRepository;
 
+	/** The model mapper. */
 	@Autowired
 	ModelMapper modelMapper;
 
+	/** The api response. */
 	@Autowired
 	APIResponse apiResponse;
 
+	/**
+	 * Gets the all active loads.
+	 *
+	 * @return the all active loads
+	 */
 	@Override
 	public APIResponse getAllActiveLoads() {
 		List<Load> activeLoads = loadRepository.findAll();
@@ -40,6 +52,11 @@ public class LoadServiceImpl implements LoadService {
 		return apiResponse;
 	}
 
+	/**
+	 * Gets the all load.
+	 *
+	 * @return the all load
+	 */
 	@Override
 	public List<LoadDTO> getAllLoad() {
 		List<Load> loadList = loadRepository.findAll();
@@ -49,6 +66,11 @@ public class LoadServiceImpl implements LoadService {
 		return loads;
 	}
 
+	/**
+	 * Save.
+	 *
+	 * @param load the load
+	 */
 	@Override
 	public void save(LoadDTO load) {
 		LOGGER.info("In save load");

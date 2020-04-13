@@ -2,9 +2,16 @@ package com.cei.load.domain;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import com.cei.load.domain.vo.Auditable;
 
@@ -27,7 +34,7 @@ public class LoadTripDetails extends Auditable<Long> {
 
 	@Enumerated(EnumType.STRING)
 	@Column(length = 8)
-	private TripTypes tripType;
+	TripTypes tripType;
 
 	@Column(name = "expected_trip_date")
 	Date expectedTripDate;
@@ -40,6 +47,9 @@ public class LoadTripDetails extends Auditable<Long> {
 
 	@Column(name = "actual_trip_time")
 	Time actualripTime;
+	
+	@Column(name = "company_name")
+	String companyName;
 	
 	@Column(name = "city")
 	String city;
@@ -55,4 +65,7 @@ public class LoadTripDetails extends Auditable<Long> {
 
 	@Column(name ="is_active")
 	boolean isActive;
+	
+	@Column(name = "trip_notes")
+	String tripNotes;
 }

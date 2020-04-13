@@ -1,16 +1,13 @@
 package com.cei.load.domain;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
-import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.ColumnResult;
 import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 import javax.persistence.Id;
@@ -58,6 +55,7 @@ import lombok.Setter;
 public class LoadBoard {
 
 
+  /** The load id. */
   @Id
   @Column(name = "load_id", unique = true, nullable = false)
   private long loadId;

@@ -11,6 +11,10 @@ import com.cei.load.domain.vo.Auditable;
 import lombok.Getter;
 import lombok.Setter;
 
+
+/**
+ * The Class LoadStatus.
+ */
 @Entity
 @Table(name = "load_status", schema = "logisol")
 @AttributeOverride(name = "id", column = @Column(name = "load_status_id"))
@@ -19,9 +23,11 @@ import lombok.Setter;
 @Setter
 public class LoadStatus extends Auditable<Long> {
 	
+	/** The load status name. */
 	@Column(name = "load_status_name")
 	String loadStatusName;
 	
+	/** The description. */
 	@Column(name = "description")
 	String description;
 }

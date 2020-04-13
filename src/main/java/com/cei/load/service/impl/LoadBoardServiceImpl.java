@@ -10,6 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * The Class LoadBoardServiceImpl.
+ */
 @Service
 public class LoadBoardServiceImpl implements LoadBoardService {
 
@@ -21,6 +24,11 @@ public class LoadBoardServiceImpl implements LoadBoardService {
   private LoadBoardRepository loadBoardRepository;
 
 
+  /**
+   * Find all loads for load board.
+   *
+   * @return the list
+   */
   @Override
   public List<LoadBoardDTO> findAllLoadsForLoadBoard() {
 
