@@ -2,7 +2,6 @@ package com.cei.load.service.impl;
 
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -15,6 +14,8 @@ import org.springframework.stereotype.Service;
 import com.cei.load.domain.Load;
 import com.cei.load.model.APIResponse;
 import com.cei.load.model.LoadDTO;
+import com.cei.load.model.LookupDTO;
+import com.cei.load.repository.EquipmentRepository;
 import com.cei.load.repository.LoadRepository;
 import com.cei.load.service.LoadService;
 
@@ -38,6 +39,9 @@ public class LoadServiceImpl implements LoadService {
 	/** The api response. */
 	@Autowired
 	APIResponse apiResponse;
+
+	@Autowired
+	EquipmentRepository equipmentRepository;
 
 	/**
 	 * Gets the all active loads.
@@ -83,7 +87,7 @@ public class LoadServiceImpl implements LoadService {
 		}
 		LOGGER.info("load created id: {}", load.getId());
 	}
-	
+
 	/**
 	 * Gets the load by id.
 	 *
@@ -94,5 +98,27 @@ public class LoadServiceImpl implements LoadService {
 	public LoadDTO getLoadById(Long loadId) {
 		Load load = loadRepository.findById(loadId).get();
 		return modelMapper.map(load, LoadDTO.class);
+	}
+
+	/**
+	 * Gets the active equipment.
+	 *
+	 * @return the active equipment
+	 */
+	@Override
+	public List<LookupDTO> getActiveEquipment() {
+		return modelMapper.map(equipmentRepository.getAllActiveEquipment(), modelMapperLookupDTOListType());
+	}
+
+	/**
+	 * Model mapper lookup DTO list type.
+	 *
+	 * @return the type
+	 */
+	private Type modelMapperLookupDTOListType() {
+		Type listType = new TypeToken<List<LookupDTO>>() {
+		}.getType();
+
+		return listType;
 	}
 }

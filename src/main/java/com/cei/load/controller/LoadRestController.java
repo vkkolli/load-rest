@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cei.load.model.LoadBoardDTO;
 import com.cei.load.model.LoadDTO;
+import com.cei.load.model.LookupDTO;
 import com.cei.load.service.LoadBoardService;
 import com.cei.load.service.LoadService;
 
@@ -70,5 +71,16 @@ public class LoadRestController {
 	public ResponseEntity<LoadDTO> edit(@PathVariable String loadId){
 		LoadDTO load = loadService.getLoadById(Long.valueOf(loadId));
 		return new ResponseEntity<LoadDTO>(load, HttpStatus.OK);
+	}
+	
+	/**
+	 * Equipment type.
+	 *
+	 * @return the response entity
+	 */
+	@RequestMapping(value = "/equipmentType", method = RequestMethod.GET)
+	public ResponseEntity<List<LookupDTO>> equipmentType(){
+		List<LookupDTO> activeEquipment = loadService.getActiveEquipment();
+		return new ResponseEntity<List<LookupDTO>>(activeEquipment, HttpStatus.OK);
 	}
 }
