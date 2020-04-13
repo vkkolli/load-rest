@@ -33,7 +33,7 @@ public class LoadServiceImpl implements LoadService {
 
 	@Override
 	public APIResponse getAllActiveLoads() {
-		List<Load> activeLoads = loadRepository.findAllActiveLoads();
+		List<Load> activeLoads = loadRepository.findAll();
 		apiResponse = new APIResponse();
 		apiResponse.setLoads(
 				activeLoads.stream().map(type -> modelMapper.map(type, LoadDTO.class)).collect(Collectors.toList()));

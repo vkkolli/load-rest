@@ -35,7 +35,6 @@ public class LoadRestController {
 	LoadBoardService loadBoardService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
 	public ResponseEntity<List<LoadBoardDTO>> getAllActiveLoads() {
 		LOGGER.info("LoadRestController:: getAllActiveLoads-->");
 		return new ResponseEntity<List<LoadBoardDTO>>(loadBoardService.findAllLoadsForLoadBoard(), HttpStatus.OK);
