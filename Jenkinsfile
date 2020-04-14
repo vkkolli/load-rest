@@ -18,7 +18,7 @@ pipeline {
   stages {
     stage('Cloning Git') {
       steps {
-        git 'https://cjpeter@bitbucket.org/venky_cei12/load-rest.git'
+        git branch: 'intial', credentialsId: 'Bitbucket-VMUPOC', url: 'https://cjpeter@bitbucket.org/venky_cei12/load-rest.git'
       }
     }
     stage('Maven build') {
