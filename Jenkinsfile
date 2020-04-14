@@ -18,26 +18,20 @@ pipeline {
   stages {
     stage('Cloning Git') {
       steps {
-        dir('/var/workspace') {
-          git 'https://cjpeter@bitbucket.org/venky_cei12/load-rest.git'
-        }
+        git 'https://cjpeter@bitbucket.org/venky_cei12/load-rest.git'
       }
     }
     stage('Maven build') {
       steps {
         container('maven') {
-          dir('/var/workspace') {
-            sh 'mvn clean package'
-            sh 'mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)'
-          }
+          sh 'mvn clean package'
+          sh 'mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)'
         }
       }
     }
     stage('Building image') {
       steps {
-        dir('/var/workspace') {
-          sh "docker build -t $IMAGE ."
-        }
+        sh "docker build -t $IMAGE ."
       }
     }
     stage('Deploy Image') {
@@ -55,17 +49,13 @@ pipeline {
     }
     stage('Prepare Kubernetes Deployment') {
       steps {
-        dir('/var/workspace') {
-          sh "sed 's|\$IMAGE|$IMAGE|' $kubeDeployTemplate > $kubeDeploy"
-        }
+        sh "sed 's|\$IMAGE|$IMAGE|' $kubeDeployTemplate > $kubeDeploy"
       }
     }
     stage('Deploy to Kubernetes') {
       steps {
         script {
-          dir('/var/workspace') {
-            kubernetesDeploy configs: kubeDeploy, kubeconfigId: 'Kube-Config'
-          }
+          kubernetesDeploy configs: kubeDeploy, kubeconfigId: 'Kube-Config'
         }
       }
     }
