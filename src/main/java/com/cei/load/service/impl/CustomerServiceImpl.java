@@ -1,8 +1,11 @@
 package com.cei.load.service.impl;
 
+import java.lang.reflect.Type;
+import java.util.List;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +21,10 @@ import com.cei.load.service.CustomerService;
  */
 @Service
 public class CustomerServiceImpl implements CustomerService {
-	
+
 	/** The Constant LOGGER. */
 	private static final Logger LOGGER = LoggerFactory.getLogger(LoadServiceImpl.class);
-	
+
 	/** The customer repo. */
 	@Autowired
 	CustomerRepository customerRepo;
@@ -43,7 +46,7 @@ public class CustomerServiceImpl implements CustomerService {
 		customer = modelMaper.map(customerRepo.save(customerEntity), CustomerDTO.class);
 		return customer;
 	}
-	
+
 	/**
 	 * Fetch customer by id.
 	 *
@@ -55,6 +58,30 @@ public class CustomerServiceImpl implements CustomerService {
 		LOGGER.info("Fetching customer for id : {}", customerId);
 		Optional<Customer> customerEntity = customerRepo.findById(customerId);
 		return modelMaper.map(customerEntity.get(), CustomerDTO.class);
+	}
+
+	/**
+	 * Fetch customers by name.
+	 *
+	 * @param customerName the customer name
+	 * @return the list
+	 */
+	@Override
+	public List<CustomerDTO> fetchCustomersByName(String customerName) {
+		List<Customer> customers = customerRepo.findAllCustomerByCompanyName(customerName+"%");
+		return modelMaper.map(customers, modelMapperCustomerDTOListType());
+	}
+
+	/**
+	 * Model mapper lookup DTO list type.
+	 *
+	 * @return the type
+	 */
+	private Type modelMapperCustomerDTOListType() {
+		Type listType = new TypeToken<List<CustomerDTO>>() {
+		}.getType();
+
+		return listType;
 	}
 
 }
