@@ -45,7 +45,7 @@ public class LoadRestController {
 	 *
 	 * @return the all active loads
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<LoadBoardDTO>> getAllActiveLoads() {
 		LOGGER.info("LoadRestController:: getAllActiveLoads-->");
 		return new ResponseEntity<List<LoadBoardDTO>>(loadBoardService.findAllLoadsForLoadBoard(), HttpStatus.OK);
