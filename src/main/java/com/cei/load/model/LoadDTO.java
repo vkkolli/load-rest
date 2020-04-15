@@ -1,8 +1,8 @@
 package com.cei.load.model;
 
 import java.math.BigDecimal;
-import java.sql.Date;
-import java.sql.Time;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -41,30 +41,24 @@ public class LoadDTO {
 	/** The total cost. */
 	BigDecimal totalCost;
 	
-	/** The max revenue. */
-	BigDecimal maxRevenue;
+	/** The max rate. */
+	BigDecimal maxRate;
 	
-	/** The target. */
-	BigDecimal target;
+	/** The target rate. */
+	BigDecimal targetRate;
 	
-	/** The load type. */
-	String loadType;
+	/** The load size. */
+	String loadSize;
 	
-	/** The expected pickup date. */
-	Date expectedPickupDate;
+	/** The trip mileage. */
+	BigDecimal tripMileage;
 	
-	/** The expected pickup time. */
-	Time expectedPickupTime;
+	/** The load pricings. */
+	Set<LoadPricingDTO> loadPricings = new LinkedHashSet<>();
 	
-	/** The expected delivery date. */
-	Date expectedDeliveryDate;
+	/** The load commodity DTO. */
+	LoadCommodityDTO commodity;
 	
-	/** The expected delivery time. */
-	Time expectedDeliveryTime;
-	
-	/** The confirm pickup. */
-	boolean confirmPickup;
-	
-	/** The confirm delivery. */
-	boolean confirmDelivery;
+	/** The load trips. */
+	Set<LoadTripDetailsDTO> loadTrips = new LinkedHashSet<>();
 }

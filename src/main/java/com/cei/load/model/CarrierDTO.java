@@ -1,8 +1,13 @@
 package com.cei.load.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * The Class CarrierDTO.
  */
+@Getter
+@Setter
 public class CarrierDTO {
 
 	/** The id. */

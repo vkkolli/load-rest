@@ -81,11 +81,53 @@ public class LoadServiceImpl implements LoadService {
 		LOGGER.info("In save load");
 		try {
 			Load loadEntity = modelMapper.map(load, Load.class);
+			LOGGER.info(loadEntity.toString());
+			loadEntity = populateTripDetails(loadEntity);
+			loadEntity = populatePricing(loadEntity);
+			loadEntity = populateCommodity(loadEntity);
 			loadEntity = loadRepository.save(loadEntity);
+			LOGGER.info("load created id: {}", loadEntity.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		LOGGER.info("load created id: {}", load.getId());
+	}
+
+	/**
+	 * Populate commodity.
+	 *
+	 * @param load the load
+	 * @return the load
+	 */
+	private Load populateCommodity(Load load) {
+		load.getCommodity().setLoad(load);
+		return load;
+	}
+
+	/**
+	 * Populate pricing.
+	 *
+	 * @param load the load
+	 * @return the load
+	 */
+	private Load populatePricing(Load load) {
+		load.getLoadPricings().stream().forEach(pricing ->{
+			pricing.setLoad(load);
+		});
+		return load;
+	}
+
+	/**
+	 * Populate trip details.
+	 *
+	 * @param load the load
+	 * @return the load
+	 */
+	private Load populateTripDetails(Load load) {
+		load.getLoadTrips().stream().forEach(trip->{
+			trip.setLoad(load);
+			trip.setActive(true);
+		});
+		return load;
 	}
 
 	/**

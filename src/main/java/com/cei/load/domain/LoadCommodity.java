@@ -5,10 +5,13 @@ import java.math.BigInteger;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.cei.load.domain.vo.Auditable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -26,8 +29,10 @@ import lombok.Setter;
 public class LoadCommodity extends Auditable<Long> {
 	
 	/** The load. */
-	@Column(name = "load_id")
-	Long load; //fk
+	@OneToOne
+	@JoinColumn(name = "load_id")
+	@JsonIgnore
+	Load load; //fk
 	
 	/** The commodity name. */
 	@Column(name = "commodity_name")

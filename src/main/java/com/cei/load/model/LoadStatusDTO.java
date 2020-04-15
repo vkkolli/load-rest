@@ -11,7 +11,7 @@ import lombok.Setter;
 public class LoadStatusDTO {
 	
 	/** The load status id. */
-	Long loadStatusId;
+	Long id;
 	
 	/** The load status name. */
 	String loadStatusName;
