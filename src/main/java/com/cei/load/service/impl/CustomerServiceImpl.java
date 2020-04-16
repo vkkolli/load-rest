@@ -11,8 +11,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cei.load.domain.Address;
 import com.cei.load.domain.Customer;
+import com.cei.load.model.AddressDTO;
 import com.cei.load.model.CustomerDTO;
+import com.cei.load.repository.CustomerAddressRepository;
 import com.cei.load.repository.CustomerRepository;
 import com.cei.load.service.CustomerService;
 
@@ -32,7 +35,10 @@ public class CustomerServiceImpl implements CustomerService {
 	/** The model maper. */
 	@Autowired
 	ModelMapper modelMaper;
-
+	
+	@Autowired
+	CustomerAddressRepository addressRepository;
+	
 	/**
 	 * Save.
 	 *
@@ -83,5 +89,29 @@ public class CustomerServiceImpl implements CustomerService {
 
 		return listType;
 	}
+	
+	
+	/**
+	 * Model mapper address DTO list type.
+	 *
+	 * @return the type
+	 */
+	private Type modelMapperAddressDTOListType() {
+		Type listType = new TypeToken<List<AddressDTO>>() {
+		}.getType();
 
+		return listType;
+	}
+	
+	/**
+	 * Fetch address by customer id.
+	 *
+	 * @param customerId the customer id
+	 * @return the list
+	 */
+	@Override
+	public List<AddressDTO> fetchAddressByCustomerId(Long customerId) {
+		List<Address> customerList = addressRepository.findAllByCustomer(customerId);
+		return modelMaper.map(customerList, modelMapperAddressDTOListType());
+	}
 }

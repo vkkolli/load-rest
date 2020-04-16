@@ -14,13 +14,32 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.springframework.stereotype.Component;
 
+/**
+ * The Class DateConverter.
+ */
 @Component
 public class DateConverter {
+  
+  /** The Constant sdf. */
   private static final ThreadLocal<SimpleDateFormat> sdf = ThreadLocal.withInitial(() -> new SimpleDateFormat("MM/dd/yyyy"));
   
+  /** The Constant datehrmin. */
   private static final ThreadLocal<SimpleDateFormat> datehrmin = ThreadLocal.withInitial(() -> new SimpleDateFormat("MM/dd/yyyy HH:mm"));
   
+  /**
+   * The Class DateSerialize.
+   */
   public static class DateSerialize extends JsonSerializer<Date> {
+    
+    /**
+     * Serialize.
+     *
+     * @param value the value
+     * @param jgen the jgen
+     * @param provider the provider
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws JsonProcessingException the json processing exception
+     */
     public void serialize(Date value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonProcessingException {
       if (value == null) {
         jgen.writeNull();
@@ -30,7 +49,20 @@ public class DateConverter {
     }
   }
   
+  /**
+   * The Class DateTimeSerialize.
+   */
   public static class DateTimeSerialize extends JsonSerializer<Date> {
+    
+    /**
+     * Serialize.
+     *
+     * @param value the value
+     * @param jgen the jgen
+     * @param provider the provider
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws JsonProcessingException the json processing exception
+     */
     public void serialize(Date value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonProcessingException {
       if (value == null) {
         jgen.writeNull();
@@ -40,7 +72,20 @@ public class DateConverter {
     }
   }
   
+  /**
+   * The Class DateDeserialize.
+   */
   public static class DateDeserialize extends JsonDeserializer<Date> {
+    
+    /**
+     * Deserialize.
+     *
+     * @param jp the jp
+     * @param ctxt the ctxt
+     * @return the date
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws JsonProcessingException the json processing exception
+     */
     public Date deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
       String dateAsString = jp.getText();
       try {
@@ -53,7 +98,20 @@ public class DateConverter {
     }
   }
   
+  /**
+   * The Class DateTimeDeserialize.
+   */
   public static class DateTimeDeserialize extends JsonDeserializer<Date> {
+    
+    /**
+     * Deserialize.
+     *
+     * @param jp the jp
+     * @param ctxt the ctxt
+     * @return the date
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws JsonProcessingException the json processing exception
+     */
     public Date deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
       String dateAsString = jp.getText();
       try {

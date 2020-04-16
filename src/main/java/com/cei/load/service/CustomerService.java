@@ -2,6 +2,7 @@ package com.cei.load.service;
 
 import java.util.List;
 
+import com.cei.load.model.AddressDTO;
 import com.cei.load.model.CustomerDTO;
 
 /**
@@ -32,4 +33,12 @@ public interface CustomerService {
 	 * @return the list
 	 */
 	List<CustomerDTO> fetchCustomersByName(String customerName);
+	
+	/**
+	 * Fetch address by customer id.
+	 *
+	 * @param customerId the customer id
+	 * @return the list
+	 */
+	List<AddressDTO> fetchAddressByCustomerId(Long customerId);
 }

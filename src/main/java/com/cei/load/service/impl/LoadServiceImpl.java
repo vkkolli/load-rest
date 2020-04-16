@@ -40,6 +40,7 @@ public class LoadServiceImpl implements LoadService {
 	@Autowired
 	APIResponse apiResponse;
 
+	/** The equipment repository. */
 	@Autowired
 	EquipmentRepository equipmentRepository;
 

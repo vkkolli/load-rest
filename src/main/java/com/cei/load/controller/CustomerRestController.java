@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cei.load.model.AddressDTO;
 import com.cei.load.model.CustomerDTO;
 import com.cei.load.service.CustomerService;
 
@@ -59,5 +60,17 @@ public class CustomerRestController {
 	public ResponseEntity<List<CustomerDTO>> searchCustomer(@PathVariable String customerName) {
 		List<CustomerDTO> cusotmersDTO = customerService.fetchCustomersByName(customerName);
 		return new ResponseEntity<List<CustomerDTO>>(cusotmersDTO, HttpStatus.OK);
+	}
+	
+	/**
+	 * Gets the address for customer.
+	 *
+	 * @param customerId the customer id
+	 * @return the address for customer
+	 */
+	@RequestMapping(value = "/address/{customerId}", method = RequestMethod.GET)
+	public ResponseEntity<List<AddressDTO>> getAddressForCustomer(@PathVariable Long customerId){
+		List<AddressDTO> addressList = customerService.fetchAddressByCustomerId(customerId);
+		return new ResponseEntity<List<AddressDTO>>(addressList, HttpStatus.OK);
 	}
 }
