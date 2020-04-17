@@ -1,5 +1,7 @@
 package com.cei.load.domain;
 
+import java.math.BigDecimal;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,4 +36,11 @@ public class Equipment extends Auditable<Long> {
 	/** The is active. */
 	@Column(name = "is_active")
 	boolean isActive;
+	
+	@Column(name = "equipment_length")
+	BigDecimal length;
+	
+	/** The weight. */
+	@Column(name = "equipment_weight")
+	BigDecimal weight;
 }

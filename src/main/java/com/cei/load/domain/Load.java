@@ -92,8 +92,8 @@ public class Load extends Auditable<Long> {
 	@OrderBy("id ASC")
 	Set<LoadPricing> loadPricings = new LinkedHashSet<>();
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "load", cascade = CascadeType.ALL, orphanRemoval = true)
-	LoadCommodity commodity;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "load", cascade = CascadeType.ALL, orphanRemoval = true)
+	Set<LoadCommodity> commodity = new LinkedHashSet<>();
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "load", orphanRemoval = true)
 	@OrderBy("id ASC")

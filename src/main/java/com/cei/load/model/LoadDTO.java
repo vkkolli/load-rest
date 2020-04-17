@@ -57,7 +57,7 @@ public class LoadDTO {
 	Set<LoadPricingDTO> loadPricings = new LinkedHashSet<>();
 	
 	/** The load commodity DTO. */
-	LoadCommodityDTO commodity;
+	Set<LoadCommodityDTO> commodity = new LinkedHashSet<>();
 	
 	/** The load trips. */
 	Set<LoadTripDetailsDTO> loadTrips = new LinkedHashSet<>();

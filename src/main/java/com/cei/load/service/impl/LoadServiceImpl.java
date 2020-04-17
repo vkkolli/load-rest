@@ -100,7 +100,9 @@ public class LoadServiceImpl implements LoadService {
 	 * @return the load
 	 */
 	private Load populateCommodity(Load load) {
-		load.getCommodity().setLoad(load);
+		load.getCommodity().stream().forEach(commodity -> {
+			commodity.setLoad(load);
+		});
 		return load;
 	}
 
