@@ -57,7 +57,7 @@ public class LoadRestController {
 	 *
 	 * @param load the load
 	 */
-	@RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void save(@RequestBody LoadDTO load){
 		loadService.save(load);
 	}
