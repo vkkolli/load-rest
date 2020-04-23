@@ -67,7 +67,7 @@ public class LoadRestController {
 	 *
 	 * @param load the load
 	 */
-	@RequestMapping(value = "/edit/{loadId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{loadId}", method = RequestMethod.GET)
 	public ResponseEntity<LoadDTO> edit(@PathVariable String loadId){
 		LoadDTO load = loadService.getLoadById(Long.valueOf(loadId));
 		return new ResponseEntity<LoadDTO>(load, HttpStatus.OK);
