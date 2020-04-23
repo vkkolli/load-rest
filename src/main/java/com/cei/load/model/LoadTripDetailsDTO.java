@@ -40,6 +40,8 @@ public class LoadTripDetailsDTO {
 	Date expectedTripDate;
 
 	/** The expected trip time. */
+	@JsonDeserialize(using = DateConverter.DateTimeDeserialize.class)
+	@JsonSerialize(using = DateConverter.DateTimeSerialize.class)
 	Time expectedTripTime;
 
 	/** The actual trip date. */
@@ -48,6 +50,8 @@ public class LoadTripDetailsDTO {
 	Date actualTripDate;
 
 	/** The actualrip time. */
+	@JsonDeserialize(using = DateConverter.DateTimeDeserialize.class)
+	@JsonSerialize(using = DateConverter.DateTimeSerialize.class)
 	Time actualripTime;
 
 	/** The company name. */
