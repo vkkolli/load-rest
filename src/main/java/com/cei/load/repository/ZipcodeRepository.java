@@ -22,7 +22,7 @@ public interface ZipcodeRepository extends JpaRepository<Zipcode, Long> {
 	 * @param criteria the criteria
 	 * @return the list
 	 */
-	@Query(value = "SELECT a.city || ', ' || a.state || ', ' || a.zipcode FROM logisol.us_zip a WHERE LOWER(a.city) like :criteria ORDER BY city", nativeQuery = true)
+	@Query(value = "SELECT a.city || ', ' || a.state_abbr || ', ' || a.zipcode FROM logisol.us_zip a WHERE LOWER(a.city) like :criteria ORDER BY city", nativeQuery = true)
 	@Cacheable({ "cityStateZipBySearchTerm" })
 	List<String> searchCityStateZips(@Param("criteria") String criteria);
 
