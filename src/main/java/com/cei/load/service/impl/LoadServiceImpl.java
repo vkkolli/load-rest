@@ -81,6 +81,9 @@ public class LoadServiceImpl implements LoadService {
 	public void save(LoadDTO load) {
 		LOGGER.info("In save load");
 		try {
+			if(load.getCarrier().getId()==null) {
+				load.setCarrier(null);
+			}
 			Load loadEntity = modelMapper.map(load, Load.class);
 			LOGGER.info(loadEntity.toString());
 			loadEntity = populateTripDetails(loadEntity);
