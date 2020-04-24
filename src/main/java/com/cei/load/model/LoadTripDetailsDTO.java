@@ -4,11 +4,12 @@
 package com.cei.load.model;
 
 
-import java.sql.Time;
 import java.util.Date;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.cei.load.enums.TripTypes;
 import com.cei.load.util.DateConverter;
@@ -40,9 +41,10 @@ public class LoadTripDetailsDTO {
 	Date expectedTripDate;
 
 	/** The expected trip time. */
-//	@JsonDeserialize(using = DateConverter.DateTimeDeserialize.class)
-//	@JsonSerialize(using = DateConverter.DateTimeSerialize.class)
-	Time expectedTripTime;
+	@Temporal(TemporalType.TIME)
+	@JsonDeserialize(using = DateConverter.DateTimeDeserialize.class)
+	@JsonSerialize(using = DateConverter.DateTimeSerialize.class)
+	Date expectedTripTime;
 
 	/** The actual trip date. */
 	@JsonDeserialize(using = DateConverter.DateDeserialize.class)
@@ -50,9 +52,10 @@ public class LoadTripDetailsDTO {
 	Date actualTripDate;
 
 	/** The actualrip time. */
-//	@JsonDeserialize(using = DateConverter.DateTimeDeserialize.class)
-//	@JsonSerialize(using = DateConverter.DateTimeSerialize.class)
-	Time actualripTime;
+	@Temporal(TemporalType.TIME)
+	@JsonDeserialize(using = DateConverter.DateTimeDeserialize.class)
+	@JsonSerialize(using = DateConverter.DateTimeSerialize.class)
+	Date actualTripTime;
 
 	/** The company name. */
 	String companyName;

@@ -1,5 +1,12 @@
 package com.cei.load.util;
 
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.springframework.stereotype.Component;
+
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -8,11 +15,6 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.google.common.base.Strings;
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import org.springframework.stereotype.Component;
 
 /**
  * The Class DateConverter.
@@ -25,6 +27,9 @@ public class DateConverter {
   
   /** The Constant datehrmin. */
   private static final ThreadLocal<SimpleDateFormat> datehrmin = ThreadLocal.withInitial(() -> new SimpleDateFormat("MM/dd/yyyy HH:mm"));
+  
+  /** The Constant hrmin. */
+  private static final ThreadLocal<SimpleDateFormat> hrmin = ThreadLocal.withInitial(() -> new SimpleDateFormat("HH:mm:ss"));
   
   /**
    * The Class DateSerialize.
@@ -67,7 +72,7 @@ public class DateConverter {
       if (value == null) {
         jgen.writeNull();
       } else {
-        jgen.writeString(((SimpleDateFormat)DateConverter.datehrmin.get()).format(value));
+        jgen.writeString(((SimpleDateFormat)DateConverter.hrmin.get()).format(value));
       } 
     }
   }
@@ -117,7 +122,7 @@ public class DateConverter {
       try {
         if (Strings.isNullOrEmpty(dateAsString))
           return null; 
-        return new Date(((SimpleDateFormat)DateConverter.datehrmin.get()).parse(dateAsString).getTime());
+        return new Date(((SimpleDateFormat)DateConverter.hrmin.get()).parse(dateAsString).getTime());
       } catch (ParseException pe) {
         throw new RuntimeException(pe);
       } 

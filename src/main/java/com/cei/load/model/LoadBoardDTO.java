@@ -22,6 +22,9 @@ public class LoadBoardDTO {
 	
 	/** The equipment name. */
 	private String equipmentName;
+
+	/** The equipment Description. */
+	private String equipmentDesc;
 	
 	/** The load type. */
 	private String  loadType;
@@ -34,6 +37,12 @@ public class LoadBoardDTO {
 	
 	/** The customer email. */
 	private String customerEmail;
+
+	/** The customer phone. */
+	private String customerPhone;
+
+	/** The customer address. */
+	private String customerAddress;
 	
 	/** The mileage. */
 	private BigDecimal mileage;
@@ -58,12 +67,27 @@ public class LoadBoardDTO {
 	
 	/** The commodity length. */
 	private String commodityLength;
+
+	/** The commodity value. */
+	private BigDecimal commodityValue;
 	
 	/** The revenue cost. */
 	private String revenueCost;
 	
 	/** The carrier name. */
 	private String carrierName;
+
+	/** The carrier contact. */
+	private String carrierContact;
+
+	/** The carrier email. */
+	private String carrierEmail;
+
+	/** The carrier phone. */
+	private String carrierPhone;
+
+	/** The carrier address. */
+	private String carrierAddress;
 	
 	/** The actual pickup date. */
 	private String actualPickupDate;
@@ -94,19 +118,23 @@ public class LoadBoardDTO {
 	 * @param actualPickupDate the actual pickup date
 	 * @param actualDeliveryDate the actual delivery date
 	 */
-	public LoadBoardDTO(Long loadId, String age, String equipmentName, String loadType,  String loadStatus,
-						String customerName, String customerEmail,
-						BigDecimal mileage, String originCsz, String pickupDate,
-						String destinationCsz, String deliveryDate,
-						String commodityName, String commodityWeight, String commodityLength,
-						String revenueCost, String carrierName, String actualPickupDate, String actualDeliveryDate) {
+	public LoadBoardDTO(Long loadId, String age, String equipmentName, String equipmentDesc, String loadType,
+						String loadStatus, 	String customerName, String customerEmail, String customerPhone,
+						String customerAddress,  BigDecimal mileage, String originCsz, String pickupDate,
+						String destinationCsz, String deliveryDate, String commodityName, String commodityWeight,
+						String commodityLength, BigDecimal commodityValue, 	String revenueCost, String carrierName,
+						String carrierContact, String carrierEmail, String carrierPhone, String carrierAddress,
+						String actualPickupDate, String actualDeliveryDate) {
 		this.loadId = loadId;
 		this.age = age;
 		this.equipmentName = equipmentName;
+		this.equipmentDesc = equipmentDesc;
 		this.loadType = loadType;
 		this.loadStatus = loadStatus;
 		this.customerName = customerName;
 		this.customerEmail = customerEmail;
+		this.customerPhone = customerPhone;
+		this.customerAddress = customerAddress;
 		this.mileage = mileage;
 		this.originCsz = originCsz;
 		this.pickupDate = pickupDate;
@@ -115,8 +143,13 @@ public class LoadBoardDTO {
 		this.commodityName = commodityName;
 		this.commodityWeight = commodityWeight;
 		this.commodityLength = commodityLength;
+		this.commodityValue = commodityValue;
 		this.revenueCost = revenueCost;
 		this.carrierName = carrierName;
+		this.carrierContact = carrierContact;
+		this.carrierEmail = carrierEmail;
+		this.customerPhone = carrierPhone;
+		this.carrierAddress = carrierAddress;
 		this.actualPickupDate = actualPickupDate;
 		this.actualDeliveryDate = actualDeliveryDate;
 	}
