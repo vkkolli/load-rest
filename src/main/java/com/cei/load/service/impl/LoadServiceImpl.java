@@ -78,7 +78,7 @@ public class LoadServiceImpl implements LoadService {
 	 * @param load the load
 	 */
 	@Override
-	public void save(LoadDTO load) {
+	public LoadDTO save(LoadDTO load) {
 		LOGGER.info("In save load");
 		try {
 			if(load.getCarrier().getId()==null) {
@@ -91,9 +91,11 @@ public class LoadServiceImpl implements LoadService {
 			loadEntity = populateCommodity(loadEntity);
 			loadEntity = loadRepository.save(loadEntity);
 			LOGGER.info("load created id: {}", loadEntity.getId());
+			return modelMapper.map(loadEntity, LoadDTO.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	/**

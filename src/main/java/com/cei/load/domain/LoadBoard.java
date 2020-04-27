@@ -114,7 +114,7 @@ public class LoadBoard {
           "    (e.equipment_id = l.equipment_id)\n" +
           "INNER JOIN logisol.load_status ls ON \n" +
           "    ( ls.load_status_id = l.load_status_id)\n" +
-          "INNER JOIN logisol.carrier ca ON \n" +
+          "LEFT OUTER JOIN logisol.carrier ca ON \n" +
           "    ( ca.carrier_id = l.carrier_id) \n" +
           "left outer join (select * from logisol.load_trip_details ltd \n" +
           "                  where  (ltd.trip_type) = 'ORGIN') ltd_o on \n" +

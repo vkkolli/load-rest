@@ -58,8 +58,9 @@ public class LoadRestController {
 	 * @param load the load
 	 */
 	@RequestMapping(value = "", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void save(@RequestBody LoadDTO load){
-		loadService.save(load);
+	public ResponseEntity<LoadDTO> save(@RequestBody LoadDTO load){
+		LoadDTO loadDto = loadService.save(load);
+		return new ResponseEntity<LoadDTO>(loadDto, HttpStatus.OK);
 	}
 	
 	/**

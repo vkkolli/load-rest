@@ -30,7 +30,7 @@ public interface LoadService {
 	 *
 	 * @param load the load
 	 */
-	void save(LoadDTO load);
+	LoadDTO save(LoadDTO load);
 	
 	/**
 	 * Gets the load by id.
