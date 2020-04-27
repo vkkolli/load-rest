@@ -1,18 +1,9 @@
 package com.cei.load.service.impl;
 
-import com.cei.load.domain.Address;
-import com.cei.load.domain.Carrier;
-import com.cei.load.domain.Customer;
-import com.cei.load.domain.Load;
-import com.cei.load.model.AddressDTO;
-import com.cei.load.model.CarrierDTO;
-import com.cei.load.model.CustomerDTO;
-import com.cei.load.model.LoadDTO;
-import com.cei.load.repository.CarrierRepository;
-import com.cei.load.repository.CustomerAddressRepository;
-import com.cei.load.repository.CustomerRepository;
-import com.cei.load.service.CarrierService;
-import com.cei.load.service.CustomerService;
+import java.lang.reflect.Type;
+import java.util.List;
+import java.util.Optional;
+
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.slf4j.Logger;
@@ -20,9 +11,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Type;
-import java.util.List;
-import java.util.Optional;
+import com.cei.load.domain.Carrier;
+import com.cei.load.model.CarrierDTO;
+import com.cei.load.repository.CarrierRepository;
+import com.cei.load.service.CarrierService;
 
 /**
  * The Class CustomerServiceImpl.

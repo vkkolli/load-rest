@@ -3,6 +3,7 @@ package com.cei.load.service;
 import java.util.List;
 
 import com.cei.load.model.APIResponse;
+import com.cei.load.model.LoadCarrierDTO;
 import com.cei.load.model.LoadDTO;
 import com.cei.load.model.LookupDTO;
 
@@ -46,4 +47,11 @@ public interface LoadService {
 	 * @return the active equipment
 	 */
 	List<LookupDTO> getActiveEquipment();
+
+	/**
+	 * Assign carrier.
+	 *
+	 * @param loadCarrier the load carrier
+	 */
+	void assignCarrier(LoadCarrierDTO loadCarrier);
 }

@@ -9,8 +9,8 @@ import javax.persistence.Table;
 import com.cei.load.domain.vo.Auditable;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 
 /**
  * The Class LoadStatus.
@@ -21,13 +21,26 @@ import lombok.Setter;
 @SequenceGenerator(name = "seq", sequenceName = "logisol.load_status_seq", allocationSize = 1)
 @Getter
 @Setter
+@NoArgsConstructor
 public class LoadStatus extends Auditable<Long> {
-	
+
 	/** The load status name. */
 	@Column(name = "load_status_name")
 	String loadStatusName;
-	
+
 	/** The description. */
 	@Column(name = "description")
 	String description;
+
+	public LoadStatus(Long id) {
+		setId(id);
+	}
+
+	/**
+	 * 10 Posted 
+	 * 20 Carrier Assigned 
+	 * 30 Pending Pickup 
+	 * 40 In Transit 
+	 * 50 Delivered
+	 */
 }

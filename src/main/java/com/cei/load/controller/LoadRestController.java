@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cei.load.model.LoadBoardDTO;
+import com.cei.load.model.LoadCarrierDTO;
 import com.cei.load.model.LoadDTO;
 import com.cei.load.model.LookupDTO;
 import com.cei.load.service.LoadBoardService;
@@ -83,5 +84,17 @@ public class LoadRestController {
 	public ResponseEntity<List<LookupDTO>> equipmentType(){
 		List<LookupDTO> activeEquipment = loadService.getActiveEquipment();
 		return new ResponseEntity<List<LookupDTO>>(activeEquipment, HttpStatus.OK);
+	}
+	
+	/**
+	 * Assign carrier.
+	 *
+	 * @param loadCarrier the load carrier
+	 * @return the response entity
+	 */
+	@RequestMapping(value="/assignCarrier", method = RequestMethod.POST)
+	public ResponseEntity<HttpStatus> assignCarrier(@RequestBody LoadCarrierDTO loadCarrier){
+		loadService.assignCarrier(loadCarrier);
+		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 	}
 }

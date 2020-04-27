@@ -9,6 +9,7 @@ import javax.persistence.Table;
 import com.cei.load.domain.vo.Auditable;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
@@ -21,6 +22,7 @@ import lombok.Setter;
 @SequenceGenerator(name = "seq", sequenceName = "logisol.carrier_seq", allocationSize = 1)
 @Getter
 @Setter
+@NoArgsConstructor
 public class Carrier extends Auditable<Long> {
 	
 	/** The carrier name. */
@@ -59,4 +61,7 @@ public class Carrier extends Auditable<Long> {
 	@Column(name = "zip")
 	String zip;
 	
+	public Carrier(Long id) {
+		setId(id);
+	}
 }

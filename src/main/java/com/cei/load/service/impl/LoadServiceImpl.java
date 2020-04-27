@@ -2,6 +2,7 @@ package com.cei.load.service.impl;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -11,8 +12,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cei.load.domain.Carrier;
 import com.cei.load.domain.Load;
+import com.cei.load.domain.LoadStatus;
 import com.cei.load.model.APIResponse;
+import com.cei.load.model.LoadCarrierDTO;
 import com.cei.load.model.LoadDTO;
 import com.cei.load.model.LookupDTO;
 import com.cei.load.repository.EquipmentRepository;
@@ -81,7 +85,7 @@ public class LoadServiceImpl implements LoadService {
 	public LoadDTO save(LoadDTO load) {
 		LOGGER.info("In save load");
 		try {
-			if(load.getCarrier().getId()==null) {
+			if (load.getCarrier().getId() == null) {
 				load.setCarrier(null);
 			}
 			Load loadEntity = modelMapper.map(load, Load.class);
@@ -118,7 +122,7 @@ public class LoadServiceImpl implements LoadService {
 	 * @return the load
 	 */
 	private Load populatePricing(Load load) {
-		load.getLoadPricings().stream().forEach(pricing ->{
+		load.getLoadPricings().stream().forEach(pricing -> {
 			pricing.setLoad(load);
 		});
 		return load;
@@ -131,7 +135,7 @@ public class LoadServiceImpl implements LoadService {
 	 * @return the load
 	 */
 	private Load populateTripDetails(Load load) {
-		load.getLoadTrips().stream().forEach(trip->{
+		load.getLoadTrips().stream().forEach(trip -> {
 			trip.setLoad(load);
 			trip.setActive(true);
 		});
@@ -170,5 +174,27 @@ public class LoadServiceImpl implements LoadService {
 		}.getType();
 
 		return listType;
+	}
+
+	/**
+	 * Assign carrier.
+	 *
+	 * @param loadCarrier the load carrier
+	 */
+	@Override
+	public void assignCarrier(LoadCarrierDTO loadCarrier) {
+		Optional<Load> loadOption = loadRepository.findById(loadCarrier.getLoadId());
+		loadOption.ifPresent(load -> updateCarrier(load, loadCarrier));
+	}
+
+	private void updateCarrier(Load load, LoadCarrierDTO loadCarrier) {
+		if (loadCarrier.isAssigned()) {
+			load.setCarrier(new Carrier(loadCarrier.getCarrierId()));
+			load.setLoadStatus(new LoadStatus(30L));
+		} else {
+			load.setCarrier(null);
+			load.setLoadStatus(new LoadStatus(10L));
+		}
+		loadRepository.save(load);
 	}
 }
