@@ -15,10 +15,10 @@ public class CarrierDTO {
 	
 	/** The carrier name. */
 	String carrierName;
-	
+
 	/** The equipment. */
 	Long equipment;
-	
+
 	/** The carrier contact. */
 	String carrierContact;
 	
@@ -42,5 +42,11 @@ public class CarrierDTO {
 	
 	/** The zip. */
 	String zip;
+
+    String cityStateZip;
+
+    public void setCityStateZip () {
+        this.cityStateZip = this.city + ", " + this.stateAbbr + ", " + this.zip;
+    }
 
 }
