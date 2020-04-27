@@ -58,7 +58,9 @@ public class CarrierServiceImpl implements CarrierService {
 	public CarrierDTO fetchCarrierById(Long carrierId) {
 		LOGGER.info("Fetching carrier for id : {}", carrierId);
 		Optional<Carrier> carrierEntity = carrierRepository.findById(carrierId);
-		return modelMaper.map(carrierEntity.get(), CarrierDTO.class);
+		CarrierDTO carrierDTO =  modelMaper.map(carrierEntity.get(), CarrierDTO.class);
+		carrierDTO.setCityStateZip();
+		return carrierDTO;
 	}
 
 	/**
@@ -70,13 +72,21 @@ public class CarrierServiceImpl implements CarrierService {
 	@Override
 	public List<CarrierDTO> fetchCarriersByName(String carrierName) {
 		List<Carrier> carriers = carrierRepository.findAllCarrierByCarrierName(carrierName+"%");
-		return modelMaper.map(carriers, modelMapperCarrierDTOListType());
+		List<CarrierDTO> carrierDTOs = modelMaper.map(carriers, modelMapperCarrierDTOListType());
+		for(CarrierDTO carrierDTO : carrierDTOs) {
+			carrierDTO.setCityStateZip();
+		}
+		return carrierDTOs;
 	}
 
 	@Override
 	public List<CarrierDTO> findAll() {
 		List<Carrier> carriers = carrierRepository.findAll();
-		return modelMaper.map(carriers, modelMapperCarrierDTOListType());
+		List<CarrierDTO> carrierDTOs = modelMaper.map(carriers, modelMapperCarrierDTOListType());
+		for(CarrierDTO carrierDTO : carrierDTOs) {
+			carrierDTO.setCityStateZip();
+		}
+		return carrierDTOs;
 	}
 
 	/**
