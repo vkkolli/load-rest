@@ -33,7 +33,7 @@ public interface ZipcodeRepository extends JpaRepository<Zipcode, Long> {
 	 * @param paramString2 the param string 2
 	 * @return the list
 	 */
-	@Query(value = "SELECT a.city || ', ' || a.state || ', ' || a.zipcode FROM logisol.us_zip a WHERE a.country_abbr = :countryCode AND a.zipcode LIKE :zipCode", nativeQuery = true)
+	@Query(value = "SELECT a.city || ', ' || a.state_abbr || ', ' || a.zipcode FROM logisol.us_zip a WHERE a.country_abbr = :countryCode AND a.zipcode LIKE :zipCode", nativeQuery = true)
 	@Cacheable({ "cityStateZipByZipCodeAndCountryCode" })
 	List<String> searchCityStateZipByZipCodeAndCountryCode(@Param("zipCode") String paramString1,
 			@Param("countryCode") String paramString2);
