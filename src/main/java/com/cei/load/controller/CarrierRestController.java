@@ -2,9 +2,13 @@ package com.cei.load.controller;
 
 
 import com.cei.load.model.CarrierDTO;
+import com.cei.load.model.LoadBoardDTO;
 import com.cei.load.service.CarrierService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,10 +20,21 @@ import java.util.List;
 @RestController
 @RequestMapping("/carrier")
 public class CarrierRestController {
+
+	/** The Constant LOGGER. */
+	private static final Logger LOGGER = LoggerFactory.getLogger(CarrierRestController.class);
 	
 	/** The customer service. */
 	@Autowired
 	CarrierService carrierService;
+
+
+	@RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<CarrierDTO>> getAllActiveCarriers() {
+		LOGGER.info("CarrierRest Controller:: getAllActive Carriers-->");
+		return new ResponseEntity<List<CarrierDTO>>(carrierService.findAll(), HttpStatus.OK);
+
+	}
 	
 	/**
 	 * Save.

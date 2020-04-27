@@ -3,9 +3,11 @@ package com.cei.load.service.impl;
 import com.cei.load.domain.Address;
 import com.cei.load.domain.Carrier;
 import com.cei.load.domain.Customer;
+import com.cei.load.domain.Load;
 import com.cei.load.model.AddressDTO;
 import com.cei.load.model.CarrierDTO;
 import com.cei.load.model.CustomerDTO;
+import com.cei.load.model.LoadDTO;
 import com.cei.load.repository.CarrierRepository;
 import com.cei.load.repository.CustomerAddressRepository;
 import com.cei.load.repository.CustomerRepository;
@@ -76,6 +78,12 @@ public class CarrierServiceImpl implements CarrierService {
 	@Override
 	public List<CarrierDTO> fetchCarriersByName(String carrierName) {
 		List<Carrier> carriers = carrierRepository.findAllCarrierByCarrierName(carrierName+"%");
+		return modelMaper.map(carriers, modelMapperCarrierDTOListType());
+	}
+
+	@Override
+	public List<CarrierDTO> findAll() {
+		List<Carrier> carriers = carrierRepository.findAll();
 		return modelMaper.map(carriers, modelMapperCarrierDTOListType());
 	}
 

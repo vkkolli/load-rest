@@ -21,7 +21,7 @@ public interface CarrierRepository extends JpaRepository<Carrier, Long> {
 	 * @param carrierName the carrier name
 	 * @return the list
 	 */
-	@Query("select c from Carrier c where LOWER(c.carrier) like LOWER(:criteria)")
+	@Query("select c from Carrier c where LOWER(c.carrierName) like LOWER(:criteria)")
 	List<Carrier> findAllCarrierByCarrierName(@Param("criteria") String carrierName);
 	
 	

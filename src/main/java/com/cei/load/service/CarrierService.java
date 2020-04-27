@@ -1,6 +1,8 @@
 package com.cei.load.service;
 
 import com.cei.load.model.CarrierDTO;
+import com.cei.load.model.LoadBoardDTO;
+
 import java.util.List;
 
 /**
@@ -31,6 +33,7 @@ public interface CarrierService {
 	 * @return the list
 	 */
 	List<CarrierDTO> fetchCarriersByName(String carrierName);
-	
 
+
+	List<CarrierDTO> findAll();
 }
