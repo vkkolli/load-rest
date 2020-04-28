@@ -16,9 +16,6 @@ public class CarrierDTO {
 	/** The carrier name. */
 	String carrierName;
 
-	/** The equipment. */
-	Long equipment;
-
 	/** The carrier contact. */
 	String carrierContact;
 	

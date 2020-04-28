@@ -21,8 +21,6 @@ import com.cei.load.model.LookupDTO;
 import com.cei.load.service.LoadBoardService;
 import com.cei.load.service.LoadService;
 
-
-
 /**
  * The Class LoadRestController.
  */
@@ -52,49 +50,59 @@ public class LoadRestController {
 		return new ResponseEntity<List<LoadBoardDTO>>(loadBoardService.findAllLoadsForLoadBoard(), HttpStatus.OK);
 
 	}
-	
+
 	/**
 	 * Save.
 	 *
 	 * @param load the load
 	 */
 	@RequestMapping(value = "", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<LoadDTO> save(@RequestBody LoadDTO load){
+	public ResponseEntity<LoadDTO> save(@RequestBody LoadDTO load) {
 		LoadDTO loadDto = loadService.save(load);
 		return new ResponseEntity<LoadDTO>(loadDto, HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Save.
 	 *
 	 * @param load the load
 	 */
 	@RequestMapping(value = "/{loadId}", method = RequestMethod.GET)
-	public ResponseEntity<LoadDTO> edit(@PathVariable String loadId){
+	public ResponseEntity<LoadDTO> edit(@PathVariable String loadId) {
 		LoadDTO load = loadService.getLoadById(Long.valueOf(loadId));
 		return new ResponseEntity<LoadDTO>(load, HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Equipment type.
 	 *
 	 * @return the response entity
 	 */
 	@RequestMapping(value = "/equipmentType", method = RequestMethod.GET)
-	public ResponseEntity<List<LookupDTO>> equipmentType(){
+	public ResponseEntity<List<LookupDTO>> equipmentType() {
 		List<LookupDTO> activeEquipment = loadService.getActiveEquipment();
 		return new ResponseEntity<List<LookupDTO>>(activeEquipment, HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Assign carrier.
 	 *
 	 * @param loadCarrier the load carrier
 	 * @return the response entity
 	 */
-	@RequestMapping(value="/assignCarrier", method = RequestMethod.POST)
-	public ResponseEntity<HttpStatus> assignCarrier(@RequestBody LoadCarrierDTO loadCarrier){
-		loadService.assignCarrier(loadCarrier);
-		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+	@RequestMapping(value = "/assignCarrier", method = RequestMethod.POST)
+	public ResponseEntity<LoadDTO> assignCarrier(@RequestBody LoadCarrierDTO loadCarrier) {
+		LoadDTO load = loadService.assignCarrier(loadCarrier);
+		return new ResponseEntity<LoadDTO>(load, HttpStatus.OK);
+	}
+
+	/**
+	 * Gets the load status.
+	 *
+	 * @return the load status
+	 */
+	@RequestMapping(value = "/status", method = RequestMethod.GET)
+	public ResponseEntity<List<LookupDTO>> getLoadStatus() {
+		return new ResponseEntity<List<LookupDTO>>(loadService.getAllActiveLoadStatus(), HttpStatus.OK);
 	}
 }

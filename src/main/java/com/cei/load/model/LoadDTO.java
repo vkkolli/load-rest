@@ -7,10 +7,23 @@ import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class LoadDTO.
  */
+
+/**
+ * Gets the weight.
+ *
+ * @return the weight
+ */
 @Getter
+
+/**
+ * Sets the weight.
+ *
+ * @param weight the new weight
+ */
 @Setter
 public class LoadDTO {
 	
@@ -61,4 +74,10 @@ public class LoadDTO {
 	
 	/** The load trips. */
 	Set<LoadTripDetailsDTO> loadTrips = new LinkedHashSet<>();
+	
+	/** The length. */
+	BigDecimal length;
+	
+	/** The weight. */
+	BigDecimal weight;
 }

@@ -21,6 +21,7 @@ import com.cei.load.model.LoadDTO;
 import com.cei.load.model.LookupDTO;
 import com.cei.load.repository.EquipmentRepository;
 import com.cei.load.repository.LoadRepository;
+import com.cei.load.repository.LoadStatusRepository;
 import com.cei.load.service.LoadService;
 
 /**
@@ -47,7 +48,11 @@ public class LoadServiceImpl implements LoadService {
 	/** The equipment repository. */
 	@Autowired
 	EquipmentRepository equipmentRepository;
-
+	
+	/** The load status repository. */
+	@Autowired
+	LoadStatusRepository loadStatusRepository;
+	
 	/**
 	 * Gets the all active loads.
 	 *
@@ -182,19 +187,44 @@ public class LoadServiceImpl implements LoadService {
 	 * @param loadCarrier the load carrier
 	 */
 	@Override
-	public void assignCarrier(LoadCarrierDTO loadCarrier) {
+	public LoadDTO assignCarrier(LoadCarrierDTO loadCarrier) {
+		LOGGER.info("Assign carrier for loadId: {}", loadCarrier.getLoadId());
 		Optional<Load> loadOption = loadRepository.findById(loadCarrier.getLoadId());
-		loadOption.ifPresent(load -> updateCarrier(load, loadCarrier));
+		loadOption.ifPresent(l -> updateCarrier(l, loadCarrier));
+		
+		Load load = loadRepository.findById(loadCarrier.getLoadId()).get();
+		return modelMapper.map(load, LoadDTO.class);
 	}
 
+	/**
+	 * Update carrier.
+	 *
+	 * @param load        the load
+	 * @param loadCarrier the load carrier
+	 * @return the load
+	 */
 	private void updateCarrier(Load load, LoadCarrierDTO loadCarrier) {
 		if (loadCarrier.isAssigned()) {
+			LOGGER.info("Assign carrier for loadId {} and carrierId {}", loadCarrier.getLoadId(),
+					loadCarrier.getCarrierId());
 			load.setCarrier(new Carrier(loadCarrier.getCarrierId()));
-			load.setLoadStatus(new LoadStatus(30L));
+			load.setLoadStatus(new LoadStatus(20L));
 		} else {
+			LOGGER.info("UnAssign carrier for loadId {} and carrierId {}", loadCarrier.getLoadId(),
+					loadCarrier.getCarrierId());
 			load.setCarrier(null);
 			load.setLoadStatus(new LoadStatus(10L));
 		}
 		loadRepository.save(load);
+	}
+	
+	/**
+	 * Gets the all active load status.
+	 *
+	 * @return the all active load status
+	 */
+	@Override
+	public List<LookupDTO> getAllActiveLoadStatus(){
+		return modelMapper.map(loadStatusRepository.findAllActiveLoadStatus(), modelMapperLookupDTOListType());
 	}
 }

@@ -26,12 +26,16 @@ public class LoadStatus extends Auditable<Long> {
 
 	/** The load status name. */
 	@Column(name = "load_status_name")
-	String loadStatusName;
+	String name;
 
 	/** The description. */
 	@Column(name = "description")
 	String description;
 
+	/** The is active. */
+	@Column(name = "is_active")
+	boolean isActive;
+	
 	public LoadStatus(Long id) {
 		setId(id);
 	}

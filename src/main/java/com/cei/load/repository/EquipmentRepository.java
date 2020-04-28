@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import com.cei.load.domain.Equipment;
 
+/**
+ * The Interface EquipmentRepository.
+ */
 @Repository
 public interface EquipmentRepository extends JpaRepository<Equipment, Long> {
 	

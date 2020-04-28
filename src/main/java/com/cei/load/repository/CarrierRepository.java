@@ -1,20 +1,20 @@
 package com.cei.load.repository;
 
-import com.cei.load.domain.Carrier;
-import com.cei.load.domain.Customer;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.cei.load.domain.Carrier;
 
 /**
  * The Interface CustomerRepository.
  */
 @Repository
 public interface CarrierRepository extends JpaRepository<Carrier, Long> {
-	
+
 	/**
 	 * Find all carrier by carrier name.
 	 *
@@ -23,6 +23,5 @@ public interface CarrierRepository extends JpaRepository<Carrier, Long> {
 	 */
 	@Query("select c from Carrier c where LOWER(c.carrierName) like LOWER(:criteria)")
 	List<Carrier> findAllCarrierByCarrierName(@Param("criteria") String carrierName);
-	
-	
+
 }

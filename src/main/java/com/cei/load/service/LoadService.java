@@ -53,5 +53,12 @@ public interface LoadService {
 	 *
 	 * @param loadCarrier the load carrier
 	 */
-	void assignCarrier(LoadCarrierDTO loadCarrier);
+	LoadDTO assignCarrier(LoadCarrierDTO loadCarrier);
+	
+	/**
+	 * Gets the all active load status.
+	 *
+	 * @return the all active load status
+	 */
+	List<LookupDTO> getAllActiveLoadStatus();
 }
