@@ -25,6 +25,12 @@ public class LoadBoardDTO {
 
 	/** The equipment Description. */
 	private String equipmentDesc;
+
+	/** The equipment Length. */
+	private String equipmentLength;
+
+	/** The equipment Weight. */
+	private String equipmentWeight;
 	
 	/** The load type. */
 	private String  loadType;
@@ -118,7 +124,8 @@ public class LoadBoardDTO {
 	 * @param actualPickupDate the actual pickup date
 	 * @param actualDeliveryDate the actual delivery date
 	 */
-	public LoadBoardDTO(Long loadId, String age, String equipmentName, String equipmentDesc, String loadType,
+	public LoadBoardDTO(Long loadId, String age, String equipmentName, String equipmentDesc,String equipmentLength,
+						String equipmentWeight,String loadType,
 						String loadStatus, 	String customerName, String customerEmail, String customerPhone,
 						String customerAddress,  BigDecimal mileage, String originCsz, String pickupDate,
 						String destinationCsz, String deliveryDate, String commodityName, String commodityWeight,
@@ -129,6 +136,8 @@ public class LoadBoardDTO {
 		this.age = age;
 		this.equipmentName = equipmentName;
 		this.equipmentDesc = equipmentDesc;
+		this.equipmentLength = equipmentLength;
+		this.equipmentWeight = equipmentWeight;
 		this.loadType = loadType;
 		this.loadStatus = loadStatus;
 		this.customerName = customerName;
@@ -136,10 +145,10 @@ public class LoadBoardDTO {
 		this.customerPhone = customerPhone;
 		this.customerAddress = customerAddress;
 		this.mileage = mileage;
-		this.originCsz = originCsz;
-		this.pickupDate = pickupDate;
-		this.destinationCsz = destinationCsz;
-		this.deliveryDate = deliveryDate;
+		this.originCsz = originCsz.trim();
+		this.pickupDate = pickupDate.trim();
+		this.destinationCsz = destinationCsz.trim();
+		this.deliveryDate = deliveryDate.trim();
 		this.commodityName = commodityName;
 		this.commodityWeight = commodityWeight;
 		this.commodityLength = commodityLength;
@@ -148,9 +157,9 @@ public class LoadBoardDTO {
 		this.carrierName = carrierName;
 		this.carrierContact = carrierContact;
 		this.carrierEmail = carrierEmail;
-		this.customerPhone = carrierPhone;
+		this.carrierPhone = carrierPhone;
 		this.carrierAddress = carrierAddress;
-		this.actualPickupDate = actualPickupDate;
-		this.actualDeliveryDate = actualDeliveryDate;
+		this.actualPickupDate = actualPickupDate.trim();
+		this.actualDeliveryDate = actualDeliveryDate.trim();
 	}
 }

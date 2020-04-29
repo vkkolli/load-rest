@@ -1,11 +1,15 @@
 package com.cei.load.service;
 
-import java.util.List;
-
 import com.cei.load.model.APIResponse;
 import com.cei.load.model.LoadCarrierDTO;
 import com.cei.load.model.LoadDTO;
 import com.cei.load.model.LookupDTO;
+import com.cei.load.model.PickupDeliveryDatesDTO;
+
+import java.text.ParseException;
+import java.util.List;
+
+
 
 /**
  * The Interface LoadService.
@@ -61,4 +65,6 @@ public interface LoadService {
 	 * @return the all active load status
 	 */
 	List<LookupDTO> getAllActiveLoadStatus();
+
+	LoadDTO setPickupConfirmed(PickupDeliveryDatesDTO pickupDeliveryDatesDTO) throws ParseException;
 }

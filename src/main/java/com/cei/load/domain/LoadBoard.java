@@ -32,6 +32,8 @@ import lombok.Setter;
                 @ColumnResult(name = "age", type = String.class),
                 @ColumnResult(name = "equipmentName", type = String.class),
                 @ColumnResult(name = "equipmentDesc", type = String.class),
+                @ColumnResult(name = "equipmentLength", type = String.class),
+                @ColumnResult(name = "equipmentWeight", type = String.class),
                 @ColumnResult(name = "loadType", type = String.class),
                 @ColumnResult(name = "loadStatus", type = String.class),
                 @ColumnResult(name = "customerName", type = String.class),
@@ -50,8 +52,8 @@ import lombok.Setter;
                 @ColumnResult(name = "revenueCost", type = String.class),
                 @ColumnResult(name = "carrierName", type = String.class),
                 @ColumnResult(name = "carrierContact", type = String.class),
-                @ColumnResult(name = "carrierPhone", type = String.class),
                 @ColumnResult(name = "carrierEmail", type = String.class),
+                @ColumnResult(name = "carrierPhone", type = String.class),
                 @ColumnResult(name = "carrierAddress", type = String.class),
                 @ColumnResult(name = "actualPickupDate", type = String.class),
                 @ColumnResult(name = "actualDeliveryDate", type = String.class)
@@ -79,6 +81,8 @@ public class LoadBoard {
           "     , to_char(age(current_date, l.created_date), 'DD \"Days\" HH24 \":\" MI ') as age\n" +
           "     , e.equipment_name as equipmentName\n" +
           "     , e.equipment_description as equipmentDesc\n" +
+          "     , e.equipment_length as equipmentLength\n" +
+          "     , e.equipment_weight as equipmentWeight\n" +
           "     , l.load_size as loadType\n" +
           "     , ls.load_status_name as loadStatus\n" +
           "     , c.company as customerName\n" +
@@ -87,9 +91,9 @@ public class LoadBoard {
           "     , concat( a.city , ' ', a.state_abbr, ' ', a.zipcode) as customerAddress\n" +
           "     , l.trip_mileage as mileage\n" +
           "     , concat( ltd_o.city , ' ', ltd_o.state_abbr, ' ', ltd_o.zip_code) as originCsz\n" +
-          "     , concat( ltd_o.expected_trip_date, ', ', ltd_o.expected_trip_time) as pickupDate\n" +
+          "     , concat( ltd_o.expected_trip_date, ' ', ltd_o.expected_trip_time) as pickupDate\n" +
           "     , concat( ltd_d.city , ' ', ltd_d.state_abbr, ' ', ltd_d.zip_code) as destinationCsz\n" +
-          "     , concat( ltd_d.expected_trip_date, ', ', ltd_d.expected_trip_time) as deliveryDate\n" +
+          "     , concat( ltd_d.expected_trip_date, ' ', ltd_d.expected_trip_time) as deliveryDate\n" +
           "     , (ltd_d.expected_trip_date + ltd_d.expected_trip_time) as deliveryDate_tmsp\n" +
           "     , lc.commodity_name as commodityName\n" +
           "     , lc.commodity_weight as commodityWeight\n" +
@@ -101,8 +105,8 @@ public class LoadBoard {
           "     , ca.email_id as carrierEmail\n" +
           "     , ca.phone as carrierPhone\n" +
           "     , concat( ca.city , ' ', ca.state_abbr, ' ', ca.zip) as carrierAddress\n" +
-          "     , concat( ltd_o.actual_trip_date, ', ', ltd_o.actual_trip_time) as actualPickupDate\n" +
-          "     , concat( ltd_d.actual_trip_date, ', ', ltd_d.actual_trip_time) as actualDeliveryDate\n" +
+          "     , concat( ltd_o.actual_trip_date, ' ', ltd_o.actual_trip_time) as actualPickupDate\n" +
+          "     , concat( ltd_d.actual_trip_date, ' ', ltd_d.actual_trip_time) as actualDeliveryDate\n" +
           "     , ( ltd_d.actual_trip_date + ltd_d.actual_trip_time) as actualDeliveryDate_tmsp\n" +
           "  FROM logisol.load l\n" +
           "INNER JOIN logisol.customer c ON \n" +

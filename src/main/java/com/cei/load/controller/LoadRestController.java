@@ -1,7 +1,14 @@
 package com.cei.load.controller;
 
+import java.text.ParseException;
 import java.util.List;
 
+
+import com.cei.load.model.LoadBoardDTO;
+import com.cei.load.model.LoadCarrierDTO;
+import com.cei.load.model.LoadDTO;
+import com.cei.load.model.LookupDTO;
+import com.cei.load.model.PickupDeliveryDatesDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cei.load.model.LoadBoardDTO;
-import com.cei.load.model.LoadCarrierDTO;
-import com.cei.load.model.LoadDTO;
-import com.cei.load.model.LookupDTO;
 import com.cei.load.service.LoadBoardService;
 import com.cei.load.service.LoadService;
 
@@ -65,7 +68,7 @@ public class LoadRestController {
 	/**
 	 * Save.
 	 *
-	 * @param load the load
+	 * @param loadId the load
 	 */
 	@RequestMapping(value = "/{loadId}", method = RequestMethod.GET)
 	public ResponseEntity<LoadDTO> edit(@PathVariable String loadId) {
@@ -104,5 +107,16 @@ public class LoadRestController {
 	@RequestMapping(value = "/status", method = RequestMethod.GET)
 	public ResponseEntity<List<LookupDTO>> getLoadStatus() {
 		return new ResponseEntity<List<LookupDTO>>(loadService.getAllActiveLoadStatus(), HttpStatus.OK);
+	}
+
+    /**
+     * Update Confirm Pickup and Delivery.
+     *
+     * @return the load
+     */
+	@RequestMapping(value = "/confirmPickupDelivery", method = RequestMethod.POST)
+	public ResponseEntity<LoadDTO> setPickupDeliveryConfirmed(@RequestBody PickupDeliveryDatesDTO pickupDeliveryDates) throws ParseException {
+		LoadDTO load = loadService.setPickupConfirmed(pickupDeliveryDates);
+		return new ResponseEntity<LoadDTO>(load, HttpStatus.OK);
 	}
 }
