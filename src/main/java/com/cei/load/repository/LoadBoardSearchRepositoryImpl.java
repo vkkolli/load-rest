@@ -64,12 +64,16 @@ public class LoadBoardSearchRepositoryImpl implements LoadBoardSearchRepository 
     procedureQuery.setParameter("p_load_id", criteriaDTO.getLoadId());
     procedureQuery.setParameter("p_customer_id", criteriaDTO.getCustomerId());
     procedureQuery.setParameter("p_equipment_id", criteriaDTO.getEquipmentId());
-    procedureQuery.setParameter("p_origin_csz", criteriaDTO.getOriginCsz());
-    procedureQuery.setParameter("p_destination_csz", criteriaDTO.getDestinationCsz());
+    procedureQuery.setParameter("p_origin_csz", setNullOnEmpty(criteriaDTO.getOriginCsz()));
+    procedureQuery.setParameter("p_destination_csz", setNullOnEmpty(criteriaDTO.getDestinationCsz()));
 
     List<LoadBoardDTO> loadBoardDTOList = procedureQuery.getResultList();
 
     return loadBoardDTOList;
+  }
+
+  public static String setNullOnEmpty(final String text) {
+    return text != null && text.trim().isEmpty() ? null : text;
   }
 
 
