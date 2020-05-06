@@ -9,6 +9,7 @@ import com.cei.load.model.LoadCarrierDTO;
 import com.cei.load.model.LoadDTO;
 import com.cei.load.model.LookupDTO;
 import com.cei.load.model.PickupDeliveryDatesDTO;
+import com.cei.load.model.SearchCriteriaDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,6 @@ public class LoadRestController {
 	public ResponseEntity<List<LoadBoardDTO>> getAllActiveLoads() {
 		LOGGER.info("LoadRestController:: getAllActiveLoads-->");
 		return new ResponseEntity<List<LoadBoardDTO>>(loadBoardService.findAllLoadsForLoadBoard(), HttpStatus.OK);
-
 	}
 
 	/**
@@ -119,4 +119,17 @@ public class LoadRestController {
 		LoadDTO load = loadService.setPickupConfirmed(pickupDeliveryDates);
 		return new ResponseEntity<LoadDTO>(load, HttpStatus.OK);
 	}
+
+	/**
+	 *
+	 * @param criteria
+	 * @return
+	 */
+	@RequestMapping(value = "/search", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<LoadBoardDTO>> getLoadsByCriteria(@RequestBody SearchCriteriaDTO criteria) {
+		LOGGER.info("LoadRestController:: getLoadsByLoadId-->");
+		return new ResponseEntity<List<LoadBoardDTO>>(loadBoardService.findLoadsByCriteria(criteria), HttpStatus.OK);
+	}
+
+
 }

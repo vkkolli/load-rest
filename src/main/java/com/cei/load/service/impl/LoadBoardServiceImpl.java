@@ -3,7 +3,9 @@ package com.cei.load.service.impl;
 import java.lang.invoke.MethodHandles;
 import java.util.List;
 import com.cei.load.model.LoadBoardDTO;
+import com.cei.load.model.SearchCriteriaDTO;
 import com.cei.load.repository.LoadBoardRepository;
+import com.cei.load.repository.LoadBoardSearchRepository;
 import com.cei.load.service.LoadBoardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,11 +33,14 @@ public class LoadBoardServiceImpl implements LoadBoardService {
    */
   @Override
   public List<LoadBoardDTO> findAllLoadsForLoadBoard() {
-
-    List<LoadBoardDTO> loadBoard = loadBoardRepository.findAllLoadBoardMapping();
-
-    return loadBoard;
+    return loadBoardRepository.findAllLoads();
   }
+
+  @Override
+  public List<LoadBoardDTO> findLoadsByCriteria(SearchCriteriaDTO criteriaDTO) {
+    return loadBoardRepository.findLoadsByCriteria(criteriaDTO);
+  }
+
 
 
 }

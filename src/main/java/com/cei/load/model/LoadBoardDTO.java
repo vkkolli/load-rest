@@ -27,10 +27,10 @@ public class LoadBoardDTO {
 	private String equipmentDesc;
 
 	/** The equipment Length. */
-	private String equipmentLength;
+	private BigDecimal equipmentLength;
 
 	/** The equipment Weight. */
-	private String equipmentWeight;
+	private BigDecimal equipmentWeight;
 	
 	/** The load type. */
 	private String  loadType;
@@ -101,65 +101,49 @@ public class LoadBoardDTO {
 	/** The actual delivery date. */
 	private String actualDeliveryDate;
 
-	/**
-	 * Instantiates a new load board DTO.
-	 *
-	 * @param loadId the load id
-	 * @param age the age
-	 * @param equipmentName the equipment name
-	 * @param loadType the load type
-	 * @param loadStatus the load status
-	 * @param customerName the customer name
-	 * @param customerEmail the customer email
-	 * @param mileage the mileage
-	 * @param originCsz the origin csz
-	 * @param pickupDate the pickup date
-	 * @param destinationCsz the destination csz
-	 * @param deliveryDate the delivery date
-	 * @param commodityName the commodity name
-	 * @param commodityWeight the commodity weight
-	 * @param commodityLength the commodity length
-	 * @param revenueCost the revenue cost
-	 * @param carrierName the carrier name
-	 * @param actualPickupDate the actual pickup date
-	 * @param actualDeliveryDate the actual delivery date
-	 */
-	public LoadBoardDTO(Long loadId, String age, String equipmentName, String equipmentDesc,String equipmentLength,
-						String equipmentWeight,String loadType,
-						String loadStatus, 	String customerName, String customerEmail, String customerPhone,
-						String customerAddress,  BigDecimal mileage, String originCsz, String pickupDate,
-						String destinationCsz, String deliveryDate, String commodityName, String commodityWeight,
-						String commodityLength, BigDecimal commodityValue, 	String revenueCost, String carrierName,
-						String carrierContact, String carrierEmail, String carrierPhone, String carrierAddress,
-						String actualPickupDate, String actualDeliveryDate) {
-		this.loadId = loadId;
-		this.age = age;
-		this.equipmentName = equipmentName;
-		this.equipmentDesc = equipmentDesc;
-		this.equipmentLength = equipmentLength;
-		this.equipmentWeight = equipmentWeight;
-		this.loadType = loadType;
-		this.loadStatus = loadStatus;
-		this.customerName = customerName;
-		this.customerEmail = customerEmail;
-		this.customerPhone = customerPhone;
-		this.customerAddress = customerAddress;
+	private Boolean isConfirmPickupEnable;
+
+	private Boolean isConfirmDeliveryEnable;
+
+
+	public LoadBoardDTO(Long load_id, String age_of_load, String equipment_name, String equipment_description,BigDecimal equipment_length,
+						BigDecimal equipment_weight,String load_type,
+						String load_status, 	String customer_name, String customer_email, String customer_phone,
+						String customer_address,  BigDecimal mileage, String origin_csz, String pickup_date,
+						String destination_csz, String delivery_date, String commodity_name, String commodity_weight,
+						String commodity_length, BigDecimal commodity_value, 	String revenue_cost, String carrier_name,
+						String carrier_contact, String carrier_email, String carrier_phone, String carrier_address,
+						String actual_pickup_date, String actual_delivery_date, Boolean is_confirm_pickup_enable, Boolean is_confirm_delivery_enable) {
+		this.loadId = load_id;
+		this.age = age_of_load;
+		this.equipmentName = equipment_name;
+		this.equipmentDesc = equipment_description;
+		this.equipmentLength = equipment_length;
+		this.equipmentWeight = equipment_weight;
+		this.loadType = load_type;
+		this.loadStatus = load_status;
+		this.customerName = customer_name;
+		this.customerEmail = customer_email;
+		this.customerPhone = customer_phone;
+		this.customerAddress = customer_address;
 		this.mileage = mileage;
-		this.originCsz = originCsz.trim();
-		this.pickupDate = pickupDate.trim();
-		this.destinationCsz = destinationCsz.trim();
-		this.deliveryDate = deliveryDate.trim();
-		this.commodityName = commodityName;
-		this.commodityWeight = commodityWeight;
-		this.commodityLength = commodityLength;
-		this.commodityValue = commodityValue;
-		this.revenueCost = revenueCost;
-		this.carrierName = carrierName;
-		this.carrierContact = carrierContact;
-		this.carrierEmail = carrierEmail;
-		this.carrierPhone = carrierPhone;
-		this.carrierAddress = carrierAddress;
-		this.actualPickupDate = actualPickupDate.trim();
-		this.actualDeliveryDate = actualDeliveryDate.trim();
+		this.originCsz = origin_csz;
+		this.pickupDate = pickup_date;
+		this.destinationCsz = destination_csz;
+		this.deliveryDate = delivery_date;
+		this.commodityName = commodity_name;
+		this.commodityWeight = commodity_weight;
+		this.commodityLength = commodity_length;
+		this.commodityValue = commodity_value;
+		this.revenueCost = revenue_cost;
+		this.carrierName = carrier_name;
+		this.carrierContact = carrier_contact;
+		this.carrierEmail = carrier_email;
+		this.carrierPhone = carrier_phone;
+		this.carrierAddress = carrier_address;
+		this.actualPickupDate = actual_pickup_date;
+		this.actualDeliveryDate = actual_delivery_date;
+		this.isConfirmPickupEnable = is_confirm_pickup_enable;
+		this.isConfirmDeliveryEnable = is_confirm_delivery_enable;
 	}
 }
