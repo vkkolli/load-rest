@@ -76,7 +76,7 @@ public class LoadTripDetails extends Auditable<Long> {
 	@JsonDeserialize(using = DateConverter.DateDeserialize.class)
 	@JsonSerialize(using = DateConverter.DateSerialize.class)
 	@Column(name = "actual_trip_time")
-	Date actualripTime;
+	Date actualTripTime;
 
 	/** The company name. */
 	@Column(name = "company_name")
