@@ -245,7 +245,7 @@ public class LoadServiceImpl implements LoadService {
 
 		for(LoadTripDetails loadTripDetails: load.getLoadTrips()) {
 			loadTripDetails.setActualTripDate(null);
-			loadTripDetails.setActualripTime(null);
+			loadTripDetails.setActualTripTime(null);
 		}
 	}
 
