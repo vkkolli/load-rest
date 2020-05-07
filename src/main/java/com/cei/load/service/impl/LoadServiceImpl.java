@@ -8,12 +8,17 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.cei.load.domain.LoadTripDetails;
 import com.cei.load.enums.TripTypes;
 import com.cei.load.model.APIResponse;
+import com.cei.load.model.LoadBoardDTO;
 import com.cei.load.model.LoadCarrierDTO;
 import com.cei.load.model.LoadDTO;
 import com.cei.load.model.LookupDTO;
 import com.cei.load.model.PickupDeliveryDatesDTO;
+import com.cei.load.model.SearchCriteriaDTO;
+import com.cei.load.repository.LoadBoardRepository;
+import com.cei.load.repository.LoadBoardSearchRepository;
 import com.cei.load.repository.LoadTripDetailsRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -62,6 +67,9 @@ public class LoadServiceImpl implements LoadService {
 	/** The Load Trip Details Repository **/
 	@Autowired
 	LoadTripDetailsRepository loadTripDetailsRepository;
+
+	@Autowired
+	LoadBoardRepository loadBoardRepository;
 
 	public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	public static final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
@@ -229,6 +237,7 @@ public class LoadServiceImpl implements LoadService {
 			load.setLoadStatus(new LoadStatus(10L));
 		}
 		loadRepository.save(load);
+
 	}
 	
 	/**
@@ -242,7 +251,7 @@ public class LoadServiceImpl implements LoadService {
 	}
 
 	@Override
-	public LoadDTO setPickupConfirmed(PickupDeliveryDatesDTO pickupDeliveryDatesDTO) throws ParseException {
+	public LoadBoardDTO setPickupConfirmed(PickupDeliveryDatesDTO pickupDeliveryDatesDTO) throws ParseException {
 		Date actualPickupDeliveryDate = dateFormat.parse(pickupDeliveryDatesDTO.getPickupOrDeliveryDate());
 		Date actualPickupTDeliveryime = timeFormat.parse(pickupDeliveryDatesDTO.getPickupOrDeliveryTime());
 		TripTypes tripType = pickupDeliveryDatesDTO.getTripType().equalsIgnoreCase("ORGIN")? TripTypes.ORGIN : TripTypes.DESTINATION;
@@ -257,6 +266,9 @@ public class LoadServiceImpl implements LoadService {
 		Long loadStatusId = pickupDeliveryDatesDTO.getTripType().equalsIgnoreCase("ORGIN")? 30L : 40L;
 		load.setLoadStatus(new LoadStatus(loadStatusId));
 		loadRepository.save(load);
-		return modelMapper.map(load, LoadDTO.class);
+		SearchCriteriaDTO searchCarrierDto = new SearchCriteriaDTO();
+		searchCarrierDto.setLoadId(load.getId());
+		return loadBoardRepository.findLoadsByCriteria(searchCarrierDto).get(0);
+
 	}
 }

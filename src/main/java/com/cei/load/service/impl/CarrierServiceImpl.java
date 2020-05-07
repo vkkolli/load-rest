@@ -71,7 +71,7 @@ public class CarrierServiceImpl implements CarrierService {
 	 */
 	@Override
 	public List<CarrierDTO> fetchCarriersByName(String carrierName) {
-		List<Carrier> carriers = carrierRepository.findAllCarrierByCarrierName(carrierName+"%");
+		List<Carrier> carriers = carrierRepository.findAllCarrierByCarrierName("%" +carrierName+"%");
 		List<CarrierDTO> carrierDTOs = modelMaper.map(carriers, modelMapperCarrierDTOListType());
 		for(CarrierDTO carrierDTO : carrierDTOs) {
 			carrierDTO.setCityStateZip();

@@ -1,6 +1,7 @@
 package com.cei.load.service;
 
 import com.cei.load.model.APIResponse;
+import com.cei.load.model.LoadBoardDTO;
 import com.cei.load.model.LoadCarrierDTO;
 import com.cei.load.model.LoadDTO;
 import com.cei.load.model.LookupDTO;
@@ -66,5 +67,5 @@ public interface LoadService {
 	 */
 	List<LookupDTO> getAllActiveLoadStatus();
 
-	LoadDTO setPickupConfirmed(PickupDeliveryDatesDTO pickupDeliveryDatesDTO) throws ParseException;
+	LoadBoardDTO setPickupConfirmed(PickupDeliveryDatesDTO pickupDeliveryDatesDTO) throws ParseException;
 }

@@ -115,9 +115,9 @@ public class LoadRestController {
      * @return the load
      */
 	@RequestMapping(value = "/confirmPickupDelivery", method = RequestMethod.POST)
-	public ResponseEntity<LoadDTO> setPickupDeliveryConfirmed(@RequestBody PickupDeliveryDatesDTO pickupDeliveryDates) throws ParseException {
-		LoadDTO load = loadService.setPickupConfirmed(pickupDeliveryDates);
-		return new ResponseEntity<LoadDTO>(load, HttpStatus.OK);
+	public ResponseEntity<LoadBoardDTO> setPickupDeliveryConfirmed(@RequestBody PickupDeliveryDatesDTO pickupDeliveryDates) throws ParseException {
+		LoadBoardDTO load = loadService.setPickupConfirmed(pickupDeliveryDates);
+		return new ResponseEntity<LoadBoardDTO>(load, HttpStatus.OK);
 	}
 
 	/**

@@ -7,11 +7,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import javax.annotation.PostConstruct;
+import java.util.TimeZone;
+
 /**
  * The Class LoadRestApplication.
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages={"com.cei.load", "com.cei.load.repository"})
 @EnableSwagger2
+
 public class LoadRestApplication {
 
 	/**
@@ -33,5 +37,10 @@ public class LoadRestApplication {
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		return modelMapper;
+	}
+
+	@PostConstruct
+	void setDefaultProperties() {
+		TimeZone.setDefault(TimeZone.getTimeZone("America/New_York"));
 	}
 }

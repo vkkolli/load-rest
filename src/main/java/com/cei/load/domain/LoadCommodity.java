@@ -1,5 +1,6 @@
 package com.cei.load.domain;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import javax.persistence.AttributeOverride;
@@ -40,13 +41,13 @@ public class LoadCommodity extends Auditable<Long> {
 	
 	/** The commodity weight. */
 	@Column(name = "commodity_weight")
-	BigInteger commodityWeight;
+	BigDecimal commodityWeight;
 	
 	/** The commodity length. */
 	@Column(name = "commodity_length")
-	BigInteger commodityLength;
+	BigDecimal commodityLength;
 	
 	/** The commodity value. */
 	@Column(name = "commodity_value")
-	BigInteger commodityValue;
+	BigDecimal commodityValue;
 }

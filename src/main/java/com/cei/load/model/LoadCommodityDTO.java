@@ -1,5 +1,6 @@
 package com.cei.load.model;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import lombok.Getter;
@@ -19,12 +20,12 @@ public class LoadCommodityDTO {
 	String commodityName;
 
 	/** The commodity weight. */
-	BigInteger commodityWeight;
+	BigDecimal commodityWeight;
 
 	/** The commodity length. */
-	BigInteger commodityLength;
+	BigDecimal commodityLength;
 
 	/** The commodity value. */
-	BigInteger commodityValue;
+	BigDecimal commodityValue;
 
 }
