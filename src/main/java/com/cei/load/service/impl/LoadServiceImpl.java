@@ -235,11 +235,20 @@ public class LoadServiceImpl implements LoadService {
 					loadCarrier.getCarrierId());
 			load.setCarrier(null);
 			load.setLoadStatus(new LoadStatus(10L));
+			unassignPickupDates(load);
 		}
 		loadRepository.save(load);
 
 	}
-	
+
+	private void unassignPickupDates(Load load) {
+
+		for(LoadTripDetails loadTripDetails: load.getLoadTrips()) {
+			loadTripDetails.setActualTripDate(null);
+			loadTripDetails.setActualripTime(null);
+		}
+	}
+
 	/**
 	 * Gets the all active load status.
 	 *
