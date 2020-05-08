@@ -8,18 +8,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.cei.load.domain.LoadTripDetails;
-import com.cei.load.enums.TripTypes;
-import com.cei.load.model.APIResponse;
-import com.cei.load.model.LoadBoardDTO;
-import com.cei.load.model.LoadCarrierDTO;
-import com.cei.load.model.LoadDTO;
-import com.cei.load.model.LookupDTO;
-import com.cei.load.model.PickupDeliveryDatesDTO;
-import com.cei.load.model.SearchCriteriaDTO;
-import com.cei.load.repository.LoadBoardRepository;
-import com.cei.load.repository.LoadBoardSearchRepository;
-import com.cei.load.repository.LoadTripDetailsRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.slf4j.Logger;
@@ -30,9 +18,19 @@ import org.springframework.stereotype.Service;
 import com.cei.load.domain.Carrier;
 import com.cei.load.domain.Load;
 import com.cei.load.domain.LoadStatus;
+import com.cei.load.enums.TripTypes;
+import com.cei.load.model.APIResponse;
+import com.cei.load.model.LoadBoardDTO;
+import com.cei.load.model.LoadCarrierDTO;
+import com.cei.load.model.LoadDTO;
+import com.cei.load.model.LookupDTO;
+import com.cei.load.model.PickupDeliveryDatesDTO;
+import com.cei.load.model.SearchCriteriaDTO;
 import com.cei.load.repository.EquipmentRepository;
+import com.cei.load.repository.LoadBoardRepository;
 import com.cei.load.repository.LoadRepository;
 import com.cei.load.repository.LoadStatusRepository;
+import com.cei.load.repository.LoadTripDetailsRepository;
 import com.cei.load.service.LoadService;
 
 /**
@@ -59,7 +57,7 @@ public class LoadServiceImpl implements LoadService {
 	/** The equipment repository. */
 	@Autowired
 	EquipmentRepository equipmentRepository;
-	
+
 	/** The load status repository. */
 	@Autowired
 	LoadStatusRepository loadStatusRepository;
@@ -212,7 +210,7 @@ public class LoadServiceImpl implements LoadService {
 		LOGGER.info("Assign carrier for loadId: {}", loadCarrier.getLoadId());
 		Optional<Load> loadOption = loadRepository.findById(loadCarrier.getLoadId());
 		loadOption.ifPresent(l -> updateCarrier(l, loadCarrier));
-		
+
 		Load load = loadRepository.findById(loadCarrier.getLoadId()).get();
 		return modelMapper.map(load, LoadDTO.class);
 	}
@@ -235,18 +233,12 @@ public class LoadServiceImpl implements LoadService {
 					loadCarrier.getCarrierId());
 			load.setCarrier(null);
 			load.setLoadStatus(new LoadStatus(10L));
-			unassignPickupDates(load);
+			load.getLoadTrips().stream().filter(trip -> trip.getActualTripDate() != null).forEach(t -> {
+				load.setLoadStatus(new LoadStatus(30L));
+			});
 		}
 		loadRepository.save(load);
 
-	}
-
-	private void unassignPickupDates(Load load) {
-
-		for(LoadTripDetails loadTripDetails: load.getLoadTrips()) {
-			loadTripDetails.setActualTripDate(null);
-			loadTripDetails.setActualTripTime(null);
-		}
 	}
 
 	/**
@@ -255,7 +247,7 @@ public class LoadServiceImpl implements LoadService {
 	 * @return the all active load status
 	 */
 	@Override
-	public List<LookupDTO> getAllActiveLoadStatus(){
+	public List<LookupDTO> getAllActiveLoadStatus() {
 		return modelMapper.map(loadStatusRepository.findAllActiveLoadStatus(), modelMapperLookupDTOListType());
 	}
 
@@ -263,16 +255,17 @@ public class LoadServiceImpl implements LoadService {
 	public LoadBoardDTO setPickupConfirmed(PickupDeliveryDatesDTO pickupDeliveryDatesDTO) throws ParseException {
 		Date actualPickupDeliveryDate = dateFormat.parse(pickupDeliveryDatesDTO.getPickupOrDeliveryDate());
 		Date actualPickupTDeliveryime = timeFormat.parse(pickupDeliveryDatesDTO.getPickupOrDeliveryTime());
-		TripTypes tripType = pickupDeliveryDatesDTO.getTripType().equalsIgnoreCase("ORGIN")? TripTypes.ORGIN : TripTypes.DESTINATION;
-		if(tripType.ordinal()==0) {
+		TripTypes tripType = pickupDeliveryDatesDTO.getTripType().equalsIgnoreCase("ORGIN") ? TripTypes.ORGIN
+				: TripTypes.DESTINATION;
+		if (tripType.ordinal() == 0) {
 			loadTripDetailsRepository.updateActualPickupDates(actualPickupDeliveryDate, actualPickupTDeliveryime,
 					pickupDeliveryDatesDTO.getLoadId());
-		} else if(tripType.ordinal()==1){
+		} else if (tripType.ordinal() == 1) {
 			loadTripDetailsRepository.updateActualDeliveryDates(actualPickupDeliveryDate, actualPickupTDeliveryime,
 					pickupDeliveryDatesDTO.getLoadId());
 		}
 		Load load = loadRepository.findById(pickupDeliveryDatesDTO.getLoadId()).get();
-		Long loadStatusId = pickupDeliveryDatesDTO.getTripType().equalsIgnoreCase("ORGIN")? 30L : 40L;
+		Long loadStatusId = pickupDeliveryDatesDTO.getTripType().equalsIgnoreCase("ORGIN") ? 30L : 40L;
 		load.setLoadStatus(new LoadStatus(loadStatusId));
 		loadRepository.save(load);
 		SearchCriteriaDTO searchCarrierDto = new SearchCriteriaDTO();

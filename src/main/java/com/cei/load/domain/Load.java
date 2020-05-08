@@ -22,7 +22,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Load.
  */
@@ -30,26 +29,8 @@ import lombok.ToString;
 @Table(name = "load", schema = "logisol")
 @AttributeOverride(name = "id", column = @Column(name = "load_id"))
 @SequenceGenerator(name = "seq", sequenceName = "logisol.load_seq", allocationSize = 1)
-
-/**
- * Gets the weight.
- *
- * @return the weight
- */
 @Getter
-
-/**
- * Sets the weight.
- *
- * @param weight the new weight
- */
 @Setter
-
-/**
- * To string.
- *
- * @return the java.lang. string
- */
 @ToString
 public class Load extends Auditable<Long> {
 
