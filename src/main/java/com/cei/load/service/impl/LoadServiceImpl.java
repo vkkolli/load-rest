@@ -233,9 +233,10 @@ public class LoadServiceImpl implements LoadService {
 					loadCarrier.getCarrierId());
 			load.setCarrier(null);
 			load.setLoadStatus(new LoadStatus(10L));
-			load.getLoadTrips().stream().filter(trip -> trip.getActualTripDate() != null).forEach(t -> {
+			// commenting this logic for now
+			/**load.getLoadTrips().stream().filter(trip -> trip.getActualTripDate() != null).forEach(t -> {
 				load.setLoadStatus(new LoadStatus(30L));
-			});
+			});**/
 		}
 		loadRepository.save(load);
 
