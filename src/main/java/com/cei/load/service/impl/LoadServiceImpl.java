@@ -228,6 +228,9 @@ public class LoadServiceImpl implements LoadService {
 					loadCarrier.getCarrierId());
 			load.setCarrier(new Carrier(loadCarrier.getCarrierId()));
 			load.setLoadStatus(new LoadStatus(20L));
+			load.getLoadTrips().stream().filter(trip -> trip.getActualTripDate() != null).forEach(t -> {
+				load.setLoadStatus(new LoadStatus(30L));
+			});
 		} else {
 			LOGGER.info("UnAssign carrier for loadId {} and carrierId {}", loadCarrier.getLoadId(),
 					loadCarrier.getCarrierId());
