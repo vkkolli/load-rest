@@ -1,6 +1,7 @@
 package com.cei.load.model;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -104,6 +105,9 @@ public class LoadBoardDTO {
 	private Boolean isConfirmPickupEnable;
 
 	private Boolean isConfirmDeliveryEnable;
+	
+	/** The total records */
+	private BigInteger totalRecords;
 
 
 	public LoadBoardDTO(Long load_id, String age_of_load, String equipment_name, String equipment_description,BigDecimal equipment_length,
@@ -113,7 +117,7 @@ public class LoadBoardDTO {
 						String destination_csz, String delivery_date, String commodity_name, String commodity_weight,
 						String commodity_length, BigDecimal commodity_value, 	String revenue_cost, String carrier_name,
 						String carrier_contact, String carrier_email, String carrier_phone, String carrier_address,
-						String actual_pickup_date, String actual_delivery_date, Boolean is_confirm_pickup_enable, Boolean is_confirm_delivery_enable) {
+						String actual_pickup_date, String actual_delivery_date, Boolean is_confirm_pickup_enable, Boolean is_confirm_delivery_enable, BigInteger total_recods) {
 		this.loadId = load_id;
 		this.age = age_of_load;
 		this.equipmentName = equipment_name;
@@ -145,5 +149,6 @@ public class LoadBoardDTO {
 		this.actualDeliveryDate = actual_delivery_date;
 		this.isConfirmPickupEnable = is_confirm_pickup_enable;
 		this.isConfirmDeliveryEnable = is_confirm_delivery_enable;
+		this.totalRecords = total_recods;
 	}
 }
