@@ -26,7 +26,7 @@ public class LoadBoardSearchRepositoryImpl implements LoadBoardSearchRepository 
 
   public static String SEARCH_STRING="";
 
-  public List<LoadBoardDTO> findAllLoads() {
+  public List<LoadBoardDTO> findAllLoads(Integer pageNumber, Integer recordsPerPage) {
     StoredProcedureQuery procedureQuery = entityManager.createStoredProcedureQuery("logisol.fn_get_load_board",
             "LoadBoard.getAllLoadsForLoadBoardMapping");
 
@@ -35,14 +35,18 @@ public class LoadBoardSearchRepositoryImpl implements LoadBoardSearchRepository 
     procedureQuery.registerStoredProcedureParameter("p_equipment_id", Long.class, ParameterMode.IN);
     procedureQuery.registerStoredProcedureParameter("p_origin_csz", String.class, ParameterMode.IN);
     procedureQuery.registerStoredProcedureParameter("p_destination_csz", String.class, ParameterMode.IN);
-
+    procedureQuery.registerStoredProcedureParameter("p_pageid", Integer.class, ParameterMode.IN);
+    procedureQuery.registerStoredProcedureParameter("p_rec_limit", Integer.class, ParameterMode.IN);
+    procedureQuery.registerStoredProcedureParameter("p_sort_order", String.class, ParameterMode.IN);
 
     procedureQuery.setParameter("p_load_id", null);
     procedureQuery.setParameter("p_customer_id", null);
     procedureQuery.setParameter("p_equipment_id", null);
     procedureQuery.setParameter("p_origin_csz", null);
     procedureQuery.setParameter("p_destination_csz", null);
-
+    procedureQuery.setParameter("p_pageid", pageNumber);
+    procedureQuery.setParameter("p_rec_limit", recordsPerPage);
+    procedureQuery.setParameter("p_sort_order", "load_id desc");
     List<LoadBoardDTO> loadBoardDTOList = procedureQuery.getResultList();
 
     return loadBoardDTOList;
