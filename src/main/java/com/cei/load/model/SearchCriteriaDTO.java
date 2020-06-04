@@ -11,6 +11,8 @@ public class SearchCriteriaDTO {
     private Long equipmentId;
     private String originCsz;
     private String destinationCsz;
-
+    private String sortOrder;
+    private Integer pageNumber;
+    private String pageResultsCount;
 
 }

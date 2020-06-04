@@ -63,6 +63,9 @@ public class LoadBoardSearchRepositoryImpl implements LoadBoardSearchRepository 
     procedureQuery.registerStoredProcedureParameter("p_equipment_id", Long.class, ParameterMode.IN);
     procedureQuery.registerStoredProcedureParameter("p_origin_csz", String.class, ParameterMode.IN);
     procedureQuery.registerStoredProcedureParameter("p_destination_csz", String.class, ParameterMode.IN);
+    procedureQuery.registerStoredProcedureParameter("p_pageid",Integer.class, ParameterMode.IN);
+    procedureQuery.registerStoredProcedureParameter("p_rec_limit",Integer.class, ParameterMode.IN);
+    procedureQuery.registerStoredProcedureParameter("p_sort_order",String.class, ParameterMode.IN);
 
 
     procedureQuery.setParameter("p_load_id", criteriaDTO.getLoadId());
@@ -70,7 +73,9 @@ public class LoadBoardSearchRepositoryImpl implements LoadBoardSearchRepository 
     procedureQuery.setParameter("p_equipment_id", criteriaDTO.getEquipmentId());
     procedureQuery.setParameter("p_origin_csz", setNullOnEmpty(criteriaDTO.getOriginCsz()));
     procedureQuery.setParameter("p_destination_csz", setNullOnEmpty(criteriaDTO.getDestinationCsz()));
-
+    procedureQuery.setParameter("p_pageid", criteriaDTO.getPageNumber() );
+    procedureQuery.setParameter("p_rec_limit", Integer.valueOf(criteriaDTO.getPageResultsCount()));
+    procedureQuery.setParameter("p_sort_order", criteriaDTO.getSortOrder());
     List<LoadBoardDTO> loadBoardDTOList = procedureQuery.getResultList();
 
     return loadBoardDTOList;
