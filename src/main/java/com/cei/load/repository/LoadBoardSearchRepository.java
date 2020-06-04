@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface LoadBoardSearchRepository {
 
-   List<LoadBoardDTO> findAllLoads();
+   List<LoadBoardDTO> findAllLoads(Integer pageNumber, Integer recordsPerPage);
    List<LoadBoardDTO> findLoadsByCriteria(SearchCriteriaDTO criteriaDTO);
 
 }

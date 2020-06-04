@@ -1,6 +1,7 @@
 package com.cei.load.domain;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import javax.persistence.Column;
 import javax.persistence.ColumnResult;
@@ -59,7 +60,8 @@ import lombok.Setter;
                 @ColumnResult(name = "actual_pickup_date", type = String.class),
                 @ColumnResult(name = "actual_delivery_date", type = String.class),
                 @ColumnResult(name = "is_confirm_pickup_enable", type = Boolean.class),
-                @ColumnResult(name = "is_confirm_delivery_enable", type = Boolean.class)
+                @ColumnResult(name = "is_confirm_delivery_enable", type = Boolean.class),
+                @ColumnResult(name = "total_records", type = BigInteger.class)
         }))
 
 

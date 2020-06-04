@@ -32,8 +32,8 @@ public class LoadBoardServiceImpl implements LoadBoardService {
    * @return the list
    */
   @Override
-  public List<LoadBoardDTO> findAllLoadsForLoadBoard() {
-    return loadBoardRepository.findAllLoads();
+  public List<LoadBoardDTO> findAllLoadsForLoadBoard(String pageNumber, String recordsPerPage) {
+    return loadBoardRepository.findAllLoads(Integer.valueOf(pageNumber), Integer.valueOf(recordsPerPage));
   }
 
   @Override
