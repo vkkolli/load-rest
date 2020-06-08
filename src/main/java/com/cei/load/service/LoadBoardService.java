@@ -15,7 +15,7 @@ public interface LoadBoardService {
    *
    * @return the list
    */
-  public List<LoadBoardDTO> findAllLoadsForLoadBoard(String pageNumber, String recordsPerPage) ;
+  public List<LoadBoardDTO> findAllLoadsForLoadBoard() ;
 
   public List<LoadBoardDTO> findLoadsByCriteria(SearchCriteriaDTO criteriaDTO);
 
