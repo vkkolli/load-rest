@@ -50,9 +50,9 @@ public class LoadRestController {
 	 * @return the all active loads
 	 */
 	@RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<LoadBoardDTO>> getAllActiveLoads(@RequestParam  String pageNumber, @RequestParam String recordsPerPage) {
-		LOGGER.info("LoadRestController:: getAllActiveLoads-->"+pageNumber+" "+recordsPerPage);
-		return new ResponseEntity<List<LoadBoardDTO>>(loadBoardService.findAllLoadsForLoadBoard(pageNumber, recordsPerPage), HttpStatus.OK);
+	public ResponseEntity<List<LoadBoardDTO>> getAllActiveLoads() {
+		LOGGER.info("LoadRestController:: getAllActiveLoads-->");
+		return new ResponseEntity<List<LoadBoardDTO>>(loadBoardService.findAllLoadsForLoadBoard(), HttpStatus.OK);
 	}
 
 	/**

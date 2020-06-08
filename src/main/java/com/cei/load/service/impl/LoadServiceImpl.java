@@ -275,7 +275,7 @@ public class LoadServiceImpl implements LoadService {
 		SearchCriteriaDTO searchCarrierDto = new SearchCriteriaDTO();
 		searchCarrierDto.setLoadId(load.getId());
 		searchCarrierDto.setPageNumber(1);
-		searchCarrierDto.setPageResultsCount("10");
+		searchCarrierDto.setPageResultsCount(10);
 		return loadBoardRepository.findLoadsByCriteria(searchCarrierDto).get(0);
 
 	}

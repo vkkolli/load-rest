@@ -13,5 +13,5 @@ public class SearchCriteriaDTO {
     private String destinationCsz;
     private String sortOrder;
     private Integer pageNumber;
-    private String pageResultsCount;
+    private Integer pageResultsCount;
 }
